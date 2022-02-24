@@ -4,54 +4,26 @@ using UnityEngine;
 
 /// <summary>
 /// moves camera with a bit of smooth delay
+/// also bounded by puzzle room (rectangular)
 /// </summary>
 
 public class CameraMovement : MonoBehaviour
 {
-
-    private Transform transform_cam;
-
     public GameObject player;
-    private Vector3 player_position;
-    //public GameObject player2;
-
-    //movement stuff
-    //private Vector3 dir;
-    //public float speed = 10f;
-
     public float smoothing = 0.1f;
+    public Vector2 bottom_left_coord; // drag camera box to bottom left & upper right of room
+    public Vector2 upper_right_coord; // such that the edges align and grab the positions
 
-    void Start()
-    {
-        transform_cam = GetComponent<Transform>();
-    }
+    private Vector3 target_position;
 
-    //todo camera should follow the players in the future
-    //void FixedUpdate()
-    //{
-    //    /*float horizontal = Input.GetAxisRaw("Horizontal");
-    //    dir = new Vector3(horizontal, 0f, 0f).normalized;
-
-    //    transform.position += dir * speed * Time.deltaTime;*/
-
-    //    //try to have the camera follows the player
-    //    //players locations
-    //    float x1 = player1.transform.position.x;
-    //    float x2 = player2.transform.position.x;
-
-    //    transform.position = new Vector3((x1 + x2) / 2, transform.position.y, transform.position.z);
-    //}
-
-
-    // might need to bound camera to puzzle room later
     void LateUpdate()
     {
-        if (transform.position.x != player.transform.position.x | transform.position.y != player.transform.position.y)
-        {
-            player_position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, player_position, smoothing);
-        }
-            
-    }
+        target_position = player.transform.position;
+        target_position.x = Mathf.Clamp(target_position.x, bottom_left_coord.x, upper_right_coord.x);
+        target_position.y = Mathf.Clamp(target_position.y, bottom_left_coord.y, upper_right_coord.y);
+        target_position.z = -10;
 
+        transform.position = Vector3.Lerp(transform.position, target_position, smoothing);
+
+    }
 }

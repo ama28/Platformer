@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         dir = new Vector3(horizontal, 0f, 0f).normalized;
 
         is_moving = my_rigbod.velocity.magnitude > 0;
+        apply_velocity = my_rigbod.velocity;
 
         if (!is_moving) { time_counter += Time.deltaTime; }
         else { time_counter = 0f; }
@@ -88,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (ghost.activeSelf) // if ghost is active
         {
-            StartCoroutine(FollowMe(my_rigbod.velocity)); // shadowing player's movement
+            StartCoroutine(FollowMe(apply_velocity)); // shadowing player's movement
         }
         else if (time_counter > rewind_cooldown) // if player remains stationary long enough
         {
@@ -120,5 +121,11 @@ public class PlayerMovement : MonoBehaviour
         yield return null;
         yield return new WaitForSeconds(delay_secs);
         ghost_rigbod.velocity = velo;
+
+        // adjusting for when player and ghost gets slight out of sync 
+        if (my_rigbod.velocity.magnitude == 0 && ghost_rigbod.velocity.magnitude == 0 && Vector3.Distance(ghost.transform.position, transform.position) < .3f) 
+        {
+            ghost.transform.position = Vector3.Lerp(ghost.transform.position, transform.position, .2f);
+        }
     }
 }
