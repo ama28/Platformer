@@ -1,60 +1,61 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 
+/// Really easy to get out of sync if ghost can respawn while player is moving
+/// Still sometimes gets out of sync if ghost respawns only when player is stationary
+/// - Could be a render issue or some rigidbody setting thing?
+/// 
+/// Bugs:
+/// - sometimes ghost and player gets slightly out of sync
+/// - sometimes player/ghost gets stuck in platform
+/// - can upper wall hang since y velocity is 0...
+/// 
+/// </summary>
+
 
 public class PlayerMovement : MonoBehaviour
 {
 
-    private Rigidbody2D rigbod;
-    //private Transform transform_player;
-    //public Animator animator;
+    private Rigidbody2D my_rigbod;
+    private Rigidbody2D ghost_rigbod;
 
-    //movement stuff
-    private Vector3 dir;
+    private Collider2D my_collider;
+    private Collider2D ghost_collider;
+
     public float speed = 7f;
-    public float JumpForce = 20f;
-    //float horizontalMove = 0f;
-
-    //Fire bullet stuff
-    //public Fireball fireball;
-    //public Transform LauchOffSet;
+    public float jump_force = 20f;
 
     public GameObject ghost;
-    public int offset_frames = 30; // amount of delay between ghost and player
-    public float rewind_cooldown = 2f;
+    public float delay_secs = 1.2f; // amount of delay between ghost and player
+    public float rewind_cooldown = .8f; // time to stay stationary for ghost to respawn
     public float gravity_multiplier = 5;
 
-    private List<Vector3> storedPositions; // for storing player positions for ghost to follow later
+    private Vector3 dir;
+    private Vector3 apply_velocity;
+
     private bool canFakeDoubleJump; // for rewind jump
+    private bool is_moving;
+    private float time_counter;
 
     void Start()
     {
-        rigbod = GetComponent<Rigidbody2D>();
-        rigbod.gravityScale = gravity_multiplier;
-        storedPositions = new List<Vector3>();
-        //transform_player = GetComponent<Transform>();
-    }
+        my_rigbod = GetComponent<Rigidbody2D>();
+        my_collider = GetComponent<Collider2D>();
+        my_rigbod.gravityScale = gravity_multiplier;
 
-    void Update()
-    {
-        //Fire bullet
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    Instantiate(fireball, LauchOffSet.position, transform.rotation);
-        //    FMODUnity.RuntimeManager.PlayOneShot("event:/Laser");
-        //}
+        ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
+        ghost_collider = ghost.GetComponent<Collider2D>();
+        ghost_rigbod.gravityScale = gravity_multiplier;
 
-        //comment out position restriction in case 
-        //if (Input.GetKeyDown(KeyCode.R)) //| transform.position.y < -5)
-        //{
-        //    RestartScene();
-        //}
+        Physics2D.IgnoreCollision(my_collider, ghost_collider); // allow overlap of player and ghost
 
-        //allow animator to access character's speed
-        //horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
-        //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        StartCoroutine(Rewind());
+        time_counter = 0f;
     }
 
 
@@ -63,46 +64,38 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         dir = new Vector3(horizontal, 0f, 0f).normalized;
 
-        storedPositions.Add(transform.position); // store the position of player every frame
+        is_moving = my_rigbod.velocity.magnitude > 0;
 
-        if (storedPositions.Count > offset_frames) // after a number of frames, ghost follows the player's movement
-        {
-            ghost.transform.position = storedPositions[0];
-            storedPositions.RemoveAt(0);
-        }
+        if (!is_moving) { time_counter += Time.deltaTime; }
+        else { time_counter = 0f; }
 
-        if (Input.GetButton("Jump") && ((Mathf.Abs(rigbod.velocity.y) < 0.001f) || canFakeDoubleJump))
+        if (Input.GetButton("Jump") && ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) || canFakeDoubleJump)) // jumping
         {
-            rigbod.velocity = new Vector3(0, JumpForce, 0);
+            apply_velocity = new Vector3(0, jump_force, 0);
+            my_rigbod.velocity = apply_velocity;
             canFakeDoubleJump = false;
-            //animator.SetTrigger("Jump");
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/jumpD");
         }
-        else if (Input.GetKey(KeyCode.J)) // press J to rewind
+        else if (Input.GetKey(KeyCode.J)) // rewinding (press j)
         {
             StartCoroutine(Rewind());
         }
-        else
+        else // moving horizontally
         {
-            transform.position += dir * speed * Time.deltaTime;
-            //if (dir.x < 0)
-            //{
-            //    //character faces left
-            //    transform.localRotation = Quaternion.Euler(0, 180, 0);
-            //}
+            apply_velocity = dir * speed;
+            apply_velocity.y = my_rigbod.velocity.y;
+            my_rigbod.velocity = apply_velocity;
+        }
 
-            //if (dir.x > 0)
-            //{
-            //    //character faces right
-            //    transform.localRotation = Quaternion.Euler(0, 0, 0);
-            //}
+        if (ghost.activeSelf) // if ghost is active
+        {
+            StartCoroutine(FollowMe(my_rigbod.velocity)); // shadowing player's movement
+        }
+        else if (time_counter > rewind_cooldown) // if player remains stationary long enough
+        {
+            StartCoroutine(RespawnGhost()); // reactivate the ghost
         }
     }
 
-    //public void RestartScene()
-    //{
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
 
     private IEnumerator Rewind()
     {
@@ -111,10 +104,21 @@ public class PlayerMovement : MonoBehaviour
         canFakeDoubleJump = true; // can jump after rewind
 
         yield return null;
-        yield return new WaitForSeconds(rewind_cooldown); // ghost respawn cooldown
+    }
 
-        ghost.SetActive(true); // spawns ghost
+    private IEnumerator RespawnGhost()
+    {
+        ghost.SetActive(true); // respawns ghost
         ghost.transform.position = transform.position; // ghost respawn wherever the player is
-        storedPositions = new List<Vector3>();
+        Physics2D.IgnoreCollision(my_collider, ghost_collider); // re-allow overlap between player and ghost
+
+        yield return null;
+    }
+
+    private IEnumerator FollowMe(Vector2 velo)
+    {
+        yield return null;
+        yield return new WaitForSeconds(delay_secs);
+        ghost_rigbod.velocity = velo;
     }
 }

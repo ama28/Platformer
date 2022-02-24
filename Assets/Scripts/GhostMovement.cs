@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// IGNORE THIS FOR NOW
+/// </summary>
+
 public class GhostMovement : MonoBehaviour
 {
     public GameObject player;
