@@ -70,13 +70,17 @@ public class PlayerMovement : MonoBehaviour
         if (!is_moving) { time_counter += Time.deltaTime; }
         else { time_counter = 0f; }
 
-        if (Input.GetButton("Jump") && ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) || canFakeDoubleJump)) // jumping
+        if (Input.GetButton("Jump") &&
+            ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) ||
+            canFakeDoubleJump)) // jumping
         {
             apply_velocity = new Vector3(0, jump_force, 0);
             my_rigbod.velocity = apply_velocity;
             canFakeDoubleJump = false;
         }
-        else if (Input.GetKey(KeyCode.J)) // rewinding (press j)
+        else if (Input.GetKey(KeyCode.J) &&
+            ghost.activeSelf &&
+            Vector3.Distance(ghost.transform.position, transform.position) < 30) // rewinding (press j)
         {
             StartCoroutine(Rewind());
         }
@@ -89,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (ghost.activeSelf) // if ghost is active
         {
-            StartCoroutine(FollowMe(apply_velocity)); // shadowing player's movement
+            StartCoroutine(FollowMe(apply_velocity, time_counter)); // shadowing player's movement
         }
         else if (time_counter > rewind_cooldown) // if player remains stationary long enough
         {
@@ -116,16 +120,16 @@ public class PlayerMovement : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator FollowMe(Vector2 velo)
+    private IEnumerator FollowMe(Vector2 velo, float time_stationary)
     {
-        yield return null;
-        yield return new WaitForSeconds(delay_secs);
-        ghost_rigbod.velocity = velo;
-
         // adjusting for when player and ghost gets slight out of sync 
-        if (my_rigbod.velocity.magnitude == 0 && ghost_rigbod.velocity.magnitude == 0 && Vector3.Distance(ghost.transform.position, transform.position) < .3f) 
+        if (time_stationary > delay_secs) 
         {
             ghost.transform.position = Vector3.Lerp(ghost.transform.position, transform.position, .2f);
         }
+
+        yield return null;
+        yield return new WaitForSeconds(delay_secs);
+        ghost_rigbod.velocity = velo;
     }
 }
