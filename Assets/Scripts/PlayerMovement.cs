@@ -91,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
             my_rigbod.velocity = apply_velocity;
         }
 
+
+
         if (ghost.activeSelf) // if ghost is active
         {
             StartCoroutine(FollowMe(apply_velocity, time_counter)); // shadowing player's movement
