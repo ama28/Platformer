@@ -69,5 +69,11 @@ public class DialogueManager : MonoBehaviour
             canvas.Find("CanTalk").gameObject.SetActive(false);
         }
 
+        //disable all canvas components
+        for (int i = 0; i < canvas.childCount; i++)
+        {
+            canvas.GetChild(i).gameObject.SetActive(false);
+        }
+
     }
 }
