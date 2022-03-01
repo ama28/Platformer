@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public bool canTalk, talking;
     public string line;
     public float typingSpeed;
+    //public float textBar_showDelay;
 
     void Start()
     {
@@ -28,8 +29,7 @@ public class DialogueManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    { 
         if (canTalk && Input.GetKey(KeyCode.F))
         {
             //enable textbar
@@ -38,8 +38,6 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(typeOut());
             canTalk = false;
         }
-
-        //if(talking)
         
     }
 
@@ -67,6 +65,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         textBar.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = line;
+        //yield return new WaitForSeconds(textBar_showDelay);
+        
+        //disable all canvas components
+        /*for (int i = 0; i < canvas.childCount; i++)
+        {
+            canvas.GetChild(i).gameObject.SetActive(false);
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D other)
