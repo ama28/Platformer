@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject textBar;
     public bool canTalk, talking;
     public string line;
+    public float typingSpeed;
 
     void Start()
     {
@@ -33,24 +34,39 @@ public class DialogueManager : MonoBehaviour
         {
             //enable textbar
             textBar.SetActive(true);
-
-            int sublen = 0;
-            float timer = 0;
-            while (sublen < line.Length)
-            {
-                timer += Time.deltaTime;
-                sublen = Mathf.FloorToInt(timer);
-
-                if (sublen > line.Length)
-                    sublen = line.Length;
-
-                textBar.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = "hi";
-                print("wee");
-            }
+            //typing effect
+            StartCoroutine(typeOut());
+            canTalk = false;
         }
 
         //if(talking)
         
+    }
+
+    private IEnumerator typeOut()
+    {
+        int sublen = 0;
+        float timer = 0;
+        while (sublen < line.Length)
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+                break;
+            timer += Time.deltaTime * typingSpeed;
+            sublen = Mathf.FloorToInt(timer);
+
+            if (sublen > line.Length)
+                sublen = line.Length;
+
+            string toShow = line.Substring(0, sublen);
+            //print(timer);
+            textBar.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = toShow;
+            //print("wee");
+
+            yield return null;
+
+        }
+
+        textBar.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = line;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -64,16 +80,20 @@ public class DialogueManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+
         if (other.tag == "Player")
         {
-            canvas.Find("CanTalk").gameObject.SetActive(false);
+            //print("Exit");
+            canTalk = false;
+
+            //disable all canvas components
+            for (int i = 0; i < canvas.childCount; i++)
+            {
+                canvas.GetChild(i).gameObject.SetActive(false);
+            }
+
         }
 
-        //disable all canvas components
-        for (int i = 0; i < canvas.childCount; i++)
-        {
-            canvas.GetChild(i).gameObject.SetActive(false);
-        }
 
     }
 }
