@@ -6,25 +6,32 @@ public class DialogueManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform canvas;
-    private GameObject textBar;
-    public bool canTalk, talking;
-    public string line;
+    public bool canTalk, NPC_talking, doneTalking;
+    //NPC talking represents who talks first
+    public string NPC_line, player_line;
     public float typingSpeed;
-    //public float textBar_showDelay;
+    public float textBar_showDelay;
 
+    private GameObject NPC_textBar;
+    private GameObject player_textBar;
     void Start()
     {
         canvas = transform.Find("Canvas");
-        textBar = canvas.Find("TextBar").gameObject;
+        NPC_textBar = canvas.Find("TextBar").gameObject;
+
+        GameObject player_canvas = GameObject.FindGameObjectWithTag("Player");
+        player_textBar = player_canvas.transform.Find("Canvas").Find("TextBar").gameObject;
         
-        //disable all canvas components
+        //disable all canvas component
         for (int i = 0; i < canvas.childCount; i++)
         {
             canvas.GetChild(i).gameObject.SetActive(false);
+    
         }
+        player_textBar.SetActive(false);
         canTalk = false;
-        talking = false;
-
+        NPC_talking = true;
+        doneTalking = false;
     }
 
     // Update is called once per frame
@@ -32,17 +39,29 @@ public class DialogueManager : MonoBehaviour
     { 
         if (canTalk && Input.GetKey(KeyCode.F))
         {
-            //enable textbar
-            textBar.SetActive(true);
             //typing effect
-            StartCoroutine(typeOut());
+            if(NPC_talking)
+                StartCoroutine(typeOut(NPC_line, NPC_textBar));
+            else
+                StartCoroutine(typeOut(player_line, player_textBar));
             canTalk = false;
         }
-        
+
+        /*if (doneTalking && Input.GetKey(KeyCode.F))
+        {
+            for (int i = 0; i < canvas.childCount; i++)
+            {
+                canvas.GetChild(i).gameObject.SetActive(false);
+
+            }
+            doneTalking = false;
+        }*/
+
     }
 
-    private IEnumerator typeOut()
+    private IEnumerator typeOut(string line, GameObject textBar)
     {
+        textBar.SetActive(true);
         int sublen = 0;
         float timer = 0;
         while (sublen < line.Length)
@@ -61,17 +80,17 @@ public class DialogueManager : MonoBehaviour
             //print("wee");
 
             yield return null;
-
         }
 
         textBar.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = line;
-        //yield return new WaitForSeconds(textBar_showDelay);
-        
+
+        yield return new WaitForSeconds(textBar_showDelay);
+        //doneTalking = true;
         //disable all canvas components
-        /*for (int i = 0; i < canvas.childCount; i++)
+        for (int i = 0; i < canvas.childCount; i++)
         {
             canvas.GetChild(i).gameObject.SetActive(false);
-        }*/
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

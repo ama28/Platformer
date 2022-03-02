@@ -3484,9 +3484,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canTalk: 0
-  talking: 0
-  line: sddgfsssdasdasasg
+  NPC_talking: 0
+  doneTalking: 0
+  NPC_line: Welcome!
+  player_line: 
   typingSpeed: 10
+  textBar_showDelay: 3
 --- !u!1 &1979318044
 GameObject:
   m_ObjectHideFlags: 0
