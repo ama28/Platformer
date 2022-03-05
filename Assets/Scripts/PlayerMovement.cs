@@ -22,116 +22,100 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Rigidbody2D my_rigbod;
-    private Rigidbody2D ghost_rigbod;
 
-    private Collider2D my_collider;
-    private Collider2D ghost_collider;
+    private GameObject ghost;
+    public GameObject ghostPrefab;
+    private Rigidbody2D ghost_rigbod;
 
     public float speed = 7f;
     public float jump_force = 20f;
+    public Vector2 movementVector;
+    public float rewindAnimationLength = 0f; // time it takes for player to rewind
+    private float delay;
 
-    public GameObject ghost;
-    public float delay_secs = 1.2f; // amount of delay between ghost and player
-    public float rewind_cooldown = .8f; // time to stay stationary for ghost to respawn
-    public float gravity_multiplier = 5;
-
-    private Vector3 dir;
-    private Vector3 apply_velocity;
+    public float rewind_cooldown = 3.0f; // cooldown before rewinding again
 
     private bool canFakeDoubleJump; // for rewind jump
-    private bool is_moving;
-    private float time_counter;
+    public float time_stationary;
+    public bool is_moving;
 
     void Start()
     {
         my_rigbod = GetComponent<Rigidbody2D>();
-        my_collider = GetComponent<Collider2D>();
-        my_rigbod.gravityScale = gravity_multiplier;
 
+        ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
         ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
-        ghost_collider = ghost.GetComponent<Collider2D>();
-        ghost_rigbod.gravityScale = gravity_multiplier;
 
-        Physics2D.IgnoreCollision(my_collider, ghost_collider); // allow overlap of player and ghost
-
-        StartCoroutine(Rewind());
-        time_counter = 0f;
+        delay = ghost.GetComponent<Ghost>().delay_secs;
+        time_stationary = 0f;
     }
 
+    private void Update()
+    {
+        //get movement inputs
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        movementVector = new Vector2(horizontal * speed, my_rigbod.velocity.y);
+
+        //decide whether adjustment is needed – set time statioinary
+        is_moving = my_rigbod.velocity.magnitude > 0;
+
+        if (!is_moving) { time_stationary += Time.deltaTime; } //set time standing still
+        else { time_stationary = 0f; }
+
+        //rewind
+        if (Input.GetKeyDown(KeyCode.J)) 
+        {
+            Rewind();
+            my_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
+            ghost_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+            ghost_rigbod.gravityScale = 0;
+        }
+    }
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        dir = new Vector3(horizontal, 0f, 0f).normalized;
+        //execute movement
+        my_rigbod.velocity = movementVector;
+        //StartCoroutine(FollowMe(movementVector, time_stationary));
 
-        is_moving = my_rigbod.velocity.magnitude > 0;
-        apply_velocity = my_rigbod.velocity;
-
-        if (!is_moving) { time_counter += Time.deltaTime; }
-        else { time_counter = 0f; }
-
+        //player jump
         if (Input.GetButton("Jump") &&
             ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) ||
             canFakeDoubleJump)) // jumping
         {
-            apply_velocity = new Vector3(0, jump_force, 0);
-            my_rigbod.velocity = apply_velocity;
+            //REMOVE FREEZE
+            //unfreeze player
+            my_rigbod.constraints = RigidbodyConstraints2D.None;
+            my_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            //unfreeze ghost
+            ghost_rigbod.constraints = RigidbodyConstraints2D.None;
+            ghost_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            //start ghost delay (prevent it from falling for delay time if its in the air)
+            StartCoroutine(TurnOnGravity());
+
+            my_rigbod.velocity = new Vector3(0, jump_force, 0);
             canFakeDoubleJump = false;
         }
-        else if (Input.GetKey(KeyCode.J) &&
-            ghost.activeSelf &&
-            Vector3.Distance(ghost.transform.position, transform.position) < 30) // rewinding (press j)
-        {
-            StartCoroutine(Rewind());
-        }
-        else // moving horizontally
-        {
-            apply_velocity = dir * speed;
-            apply_velocity.y = my_rigbod.velocity.y;
-            my_rigbod.velocity = apply_velocity;
-        }
-
-
-
-        if (ghost.activeSelf) // if ghost is active
-        {
-            StartCoroutine(FollowMe(apply_velocity, time_counter)); // shadowing player's movement
-        }
-        else if (time_counter > rewind_cooldown) // if player remains stationary long enough
-        {
-            StartCoroutine(RespawnGhost()); // reactivate the ghost
-        }
     }
 
-
-    private IEnumerator Rewind()
+    void Rewind()
     {
-        transform.position = ghost.transform.position; // rewind to ghost's position
-        ghost.SetActive(false); // despawn ghost
-        canFakeDoubleJump = true; // can jump after rewind
+        transform.position = ghost.transform.position;
+        Destroy(ghost);
+        Debug.Log("destroyed");
 
-        yield return null;
+        //respawn ghost
+        ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
+        ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
+
+        canFakeDoubleJump = true;
     }
 
-    private IEnumerator RespawnGhost()
+    private IEnumerator TurnOnGravity()
     {
-        ghost.SetActive(true); // respawns ghost
-        ghost.transform.position = transform.position; // ghost respawn wherever the player is
-        Physics2D.IgnoreCollision(my_collider, ghost_collider); // re-allow overlap between player and ghost
-
-        yield return null;
-    }
-
-    private IEnumerator FollowMe(Vector2 velo, float time_stationary)
-    {
-        // adjusting for when player and ghost gets slight out of sync 
-        if (time_stationary > delay_secs) 
-        {
-            ghost.transform.position = Vector3.Lerp(ghost.transform.position, transform.position, .2f);
-        }
-
-        yield return null;
-        yield return new WaitForSeconds(delay_secs);
-        ghost_rigbod.velocity = velo;
+        yield return new WaitForSeconds(delay);
+        ghost_rigbod.gravityScale = GetComponent<Rigidbody2D>().gravityScale;
     }
 }
