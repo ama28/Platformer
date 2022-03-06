@@ -416,7 +416,6 @@ GameObject:
   - component: {fileID: 51353126}
   - component: {fileID: 51353125}
   - component: {fileID: 51353124}
-  - component: {fileID: 51353123}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Player
@@ -424,20 +423,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &51353123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51353122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a44f01f65d2846058c81c6b0460d943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashSpeed: 20
-  startDashTime: 0.1
 --- !u!96 &51353124
 TrailRenderer:
   serializedVersion: 2
@@ -605,13 +590,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostPrefab: {fileID: 3543884854104081101, guid: 2eb6d7c1c7ec241269d54ef56599d9f8, type: 3}
-  speed: 7
   jump_force: 22
   movementVector: {x: 0, y: 0}
   rewindTeleportSpeed: 5
   rewind_cooldown: 0.8
   time_stationary: 0
   is_moving: 0
+  dashPower: 4
+  dashTime: 0.25
+  baseSpeed: 6
 --- !u!212 &51353128
 SpriteRenderer:
   m_ObjectHideFlags: 0

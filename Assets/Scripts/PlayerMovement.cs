@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject ghostPrefab;
     private Rigidbody2D ghost_rigbod;
 
-    public float speed = 7.0f;
+    float speed;
     public float jump_force = 20.0f;
     public Vector2 movementVector;
     public float rewindTeleportSpeed = 5.0f; // time it takes for player to rewind
@@ -38,6 +38,15 @@ public class PlayerMovement : MonoBehaviour
     public float time_stationary;
     public bool is_moving;
 
+    //dash stuff
+    public float dashPower;
+    public float dashTime;
+    public float baseSpeed;
+    bool isDashing;
+    float vertical; 
+    float horizontal;
+    bool isGrounded; 
+
     void Start()
     {
         my_rigbod = GetComponent<Rigidbody2D>();
@@ -47,13 +56,62 @@ public class PlayerMovement : MonoBehaviour
 
         delay = ghost.GetComponent<Ghost>().delay_secs;
         time_stationary = 0f;
+
+        //dash stuff
+        speed = baseSpeed;
+        isDashing = false;
+        isGrounded = false;
+    }
+
+    IEnumerator Dash()
+    {
+        isDashing = true; 
+        speed *= dashPower; //dash
+        yield return new WaitForSeconds(dashTime); //wait before finish dashing
+        speed = baseSpeed; //stop dash
+        isDashing = false; 
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) //kill enemy w dash & check grounded
+    {
+        if(collision.gameObject.tag == "Enemy" && isDashing)
+        {
+            Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
     }
 
     private void Update()
     {
         //get movement inputs
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        movementVector = new Vector2(horizontal * speed, my_rigbod.velocity.y);
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+
+        //dash stuff
+        if(Input.GetKey(KeyCode.K)){
+            if(!isDashing && isGrounded){
+                if(vertical == 0){ //horizontal dash
+                    StartCoroutine(Dash());
+                    movementVector = new Vector2(horizontal * speed, my_rigbod.velocity.y);
+                }
+                if(horizontal == 0){ //vertical dash
+                    StartCoroutine(Dash());
+                    movementVector = new Vector2(my_rigbod.velocity.x, vertical * speed);
+                    isGrounded = false;
+                }
+                if(vertical != 0  && horizontal != 0){ //diagonal dash
+                    StartCoroutine(Dash());
+                    movementVector = new Vector2(horizontal * speed, vertical * speed); 
+                    isGrounded = false;
+                }
+            }
+        }
+        else{ //normal left right movement
+            movementVector = new Vector2(horizontal * speed, my_rigbod.velocity.y);
+        }
 
         //decide whether adjustment is needed – set time statioinary
         is_moving = my_rigbod.velocity.magnitude > 0;
@@ -79,8 +137,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //execute movement
         my_rigbod.velocity = movementVector;
-        //StartCoroutine(FollowMe(movementVector, time_stationary));
 
+        //StartCoroutine(FollowMe(movementVector, time_stationary));
         //jump button input
         if (Input.GetButton("Jump") &&
             ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) ||

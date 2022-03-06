@@ -26,7 +26,7 @@ public class DashSlash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dir == 0 && Input.GetKey(KeyCode.LeftShift)){
+        if(dir == 0 && Input.GetKey(KeyCode.K)){
             if(Input.GetKey(KeyCode.A))
                 dir = 1;
             if(Input.GetKey(KeyCode.D))
