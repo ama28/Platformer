@@ -4,18 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// 
-/// Really easy to get out of sync if ghost can respawn while player is moving
-/// Still sometimes gets out of sync if ghost respawns only when player is stationary
-/// - Could be a render issue or some rigidbody setting thing?
-/// 
-/// Bugs:
-/// - sometimes ghost and player gets slightly out of sync
-/// - sometimes player/ghost gets stuck in platform
-/// - can upper wall hang since y velocity is 0...
-/// 
-/// </summary>
+/* Summary
+ 
+ Really easy to get out of sync if ghost can respawn while player is moving
+ Still sometimes gets out of sync if ghost respawns only when player is stationary
+ - Could be a render issue or some rigidbody setting thing?
+ 
+ Bugs:
+ - sometimes ghost and player gets slightly out of sync
+ - sometimes player/ghost gets stuck in platform
+ - can upper wall hang since y velocity is 0...
+ */
 
 
 public class PlayerMovement : MonoBehaviour
@@ -27,10 +26,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject ghostPrefab;
     private Rigidbody2D ghost_rigbod;
 
-    public float speed = 7f;
-    public float jump_force = 20f;
+    public float speed = 7.0f;
+    public float jump_force = 20.0f;
     public Vector2 movementVector;
-    public float rewindAnimationLength = 0f; // time it takes for player to rewind
+    public float rewindTeleportSpeed = 5.0f; // time it takes for player to rewind
     private float delay;
 
     public float rewind_cooldown = 3.0f; // cooldown before rewinding again
@@ -59,42 +58,47 @@ public class PlayerMovement : MonoBehaviour
         //decide whether adjustment is needed – set time statioinary
         is_moving = my_rigbod.velocity.magnitude > 0;
 
-        if (!is_moving) { time_stationary += Time.deltaTime; } //set time standing still
+        if (!is_moving) { time_stationary += Time.deltaTime; } 
         else { time_stationary = 0f; }
 
         //rewind
-        if (Input.GetKeyDown(KeyCode.J)) 
+        if (Input.GetKeyDown(KeyCode.E)) 
         {
+            //disable trail then rewind
+            GetComponent<TrailRenderer>().enabled = false;
             Rewind();
+
+            //freeze player & ghost
             my_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
-            ghost_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+            ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
             ghost_rigbod.gravityScale = 0;
         }
     }
-
+    
     void FixedUpdate()
     {
         //execute movement
         my_rigbod.velocity = movementVector;
         //StartCoroutine(FollowMe(movementVector, time_stationary));
 
-        //player jump
+        //jump button input
         if (Input.GetButton("Jump") &&
             ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) ||
-            canFakeDoubleJump)) // jumping
+            canFakeDoubleJump)) 
         {
             //REMOVE FREEZE
+
+            //re-enable trail
+            GetComponent<TrailRenderer>().enabled = true;
+
             //unfreeze player
             my_rigbod.constraints = RigidbodyConstraints2D.None;
             my_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-            //unfreeze ghost
-            ghost_rigbod.constraints = RigidbodyConstraints2D.None;
-            ghost_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-            //start ghost delay (prevent it from falling for delay time if its in the air)
+            //unfreeze ghost after delay
             StartCoroutine(TurnOnGravity());
 
+            //jump
             my_rigbod.velocity = new Vector3(0, jump_force, 0);
             canFakeDoubleJump = false;
         }
@@ -104,18 +108,21 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = ghost.transform.position;
         Destroy(ghost);
-        Debug.Log("destroyed");
 
         //respawn ghost
         ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
         ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
 
         canFakeDoubleJump = true;
+
+        //GetComponent<TrailRenderer>().enabled = true;
     }
 
     private IEnumerator TurnOnGravity()
     {
         yield return new WaitForSeconds(delay);
         ghost_rigbod.gravityScale = GetComponent<Rigidbody2D>().gravityScale;
+        ghost_rigbod.constraints = RigidbodyConstraints2D.None;
+        ghost_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }
