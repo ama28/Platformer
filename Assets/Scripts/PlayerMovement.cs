@@ -4,19 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/* Summary
- 
- Really easy to get out of sync if ghost can respawn while player is moving
- Still sometimes gets out of sync if ghost respawns only when player is stationary
- - Could be a render issue or some rigidbody setting thing?
- 
- Bugs:
- - sometimes ghost and player gets slightly out of sync
- - sometimes player/ghost gets stuck in platform
- - can upper wall hang since y velocity is 0...
- */
-
-
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -63,15 +50,6 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
     }
 
-    IEnumerator Dash()
-    {
-        isDashing = true; 
-        currentSpeed *= dashPower; //dash
-        yield return new WaitForSeconds(dashTime); //wait before finish dashing
-        currentSpeed = baseSpeed; //stop dash
-        isDashing = false; 
-    }
-
     void OnCollisionEnter2D(Collision2D collision) //kill enemy w dash & check grounded
     {
         if(collision.gameObject.tag == "Enemy" && isDashing)
@@ -91,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
 
         //dash stuff
-        if(Input.GetKey(KeyCode.LeftShift)){
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
             if(!isDashing && isGrounded){
                 if(vertical == 0){ //horizontal dash
                     StartCoroutine(Dash());
@@ -107,6 +85,18 @@ public class PlayerMovement : MonoBehaviour
                     movementVector = new Vector2(horizontal * currentSpeed, vertical * currentSpeed); 
                     isGrounded = false;
                 }
+
+                //REMOVE FREEZE
+
+                //re-enable trail
+                GetComponent<TrailRenderer>().enabled = true;
+
+                //unfreeze player
+                my_rigbod.constraints = RigidbodyConstraints2D.None;
+                my_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+                //unfreeze ghost after delay
+                StartCoroutine(TurnOnGravity());
             }
         }
         else{ //normal left right movement
@@ -144,22 +134,19 @@ public class PlayerMovement : MonoBehaviour
             ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) ||
             canFakeDoubleJump)) 
         {
-            //REMOVE FREEZE
-
-            //re-enable trail
-            GetComponent<TrailRenderer>().enabled = true;
-
-            //unfreeze player
-            my_rigbod.constraints = RigidbodyConstraints2D.None;
-            my_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-            //unfreeze ghost after delay
-            StartCoroutine(TurnOnGravity());
-
             //jump
             my_rigbod.velocity = new Vector3(0, jump_force, 0);
             canFakeDoubleJump = false;
         }
+    }
+
+    IEnumerator Dash()
+    {
+        isDashing = true;
+        currentSpeed *= dashPower; //dash
+        yield return new WaitForSeconds(dashTime); //wait before finish dashing
+        currentSpeed = baseSpeed; //stop dash
+        isDashing = false;
     }
 
     void Rewind()

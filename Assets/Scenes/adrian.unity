@@ -1099,7 +1099,7 @@ MonoBehaviour:
   rewind_cooldown: 0.8
   time_stationary: 0
   is_moving: 0
-  dashPower: 6
+  dashPower: 4
   dashTime: 0.15
 --- !u!212 &314510069
 SpriteRenderer:

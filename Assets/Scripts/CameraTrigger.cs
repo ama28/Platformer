@@ -8,11 +8,17 @@ public class CameraTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        cameraScript.onPlayerCam = false;
+        if (collision.tag == "Player")
+        {
+            cameraScript.onPlayerCam = false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        cameraScript.onPlayerCam = true;
+        if (collision.tag == "Player")
+        {
+            cameraScript.onPlayerCam = true;
+        }
     }
 }
