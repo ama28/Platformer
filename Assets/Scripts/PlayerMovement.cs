@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject ghostPrefab;
     private Rigidbody2D ghost_rigbod;
 
-    float speed;
+    public float baseSpeed = 6f;
     public float jump_force = 20.0f;
     public Vector2 movementVector;
     public float rewindTeleportSpeed = 5.0f; // time it takes for player to rewind
@@ -39,9 +39,9 @@ public class PlayerMovement : MonoBehaviour
     public bool is_moving;
 
     //dash stuff
+    private float currentSpeed;
     public float dashPower;
     public float dashTime;
-    public float baseSpeed;
     bool isDashing;
     float vertical; 
     float horizontal;
@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         time_stationary = 0f;
 
         //dash stuff
-        speed = baseSpeed;
+        currentSpeed = baseSpeed;
         isDashing = false;
         isGrounded = false;
     }
@@ -66,9 +66,9 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()
     {
         isDashing = true; 
-        speed *= dashPower; //dash
+        currentSpeed *= dashPower; //dash
         yield return new WaitForSeconds(dashTime); //wait before finish dashing
-        speed = baseSpeed; //stop dash
+        currentSpeed = baseSpeed; //stop dash
         isDashing = false; 
     }
 
@@ -91,26 +91,26 @@ public class PlayerMovement : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
 
         //dash stuff
-        if(Input.GetKey(KeyCode.K)){
+        if(Input.GetKey(KeyCode.LeftShift)){
             if(!isDashing && isGrounded){
                 if(vertical == 0){ //horizontal dash
                     StartCoroutine(Dash());
-                    movementVector = new Vector2(horizontal * speed, my_rigbod.velocity.y);
+                    movementVector = new Vector2(horizontal * currentSpeed, my_rigbod.velocity.y);
                 }
                 if(horizontal == 0){ //vertical dash
                     StartCoroutine(Dash());
-                    movementVector = new Vector2(my_rigbod.velocity.x, vertical * speed);
+                    movementVector = new Vector2(my_rigbod.velocity.x, vertical * currentSpeed);
                     isGrounded = false;
                 }
                 if(vertical != 0  && horizontal != 0){ //diagonal dash
                     StartCoroutine(Dash());
-                    movementVector = new Vector2(horizontal * speed, vertical * speed); 
+                    movementVector = new Vector2(horizontal * currentSpeed, vertical * currentSpeed); 
                     isGrounded = false;
                 }
             }
         }
         else{ //normal left right movement
-            movementVector = new Vector2(horizontal * speed, my_rigbod.velocity.y);
+            movementVector = new Vector2(horizontal * currentSpeed, my_rigbod.velocity.y);
         }
 
         //decide whether adjustment is needed – set time statioinary

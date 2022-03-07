@@ -1092,13 +1092,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostPrefab: {fileID: 3543884854104081101, guid: 2eb6d7c1c7ec241269d54ef56599d9f8, type: 3}
-  speed: 10
+  baseSpeed: 6
   jump_force: 22
   movementVector: {x: 0, y: 0}
   rewindTeleportSpeed: 5
   rewind_cooldown: 0.8
   time_stationary: 0
   is_moving: 0
+  dashPower: 6
+  dashTime: 0.15
 --- !u!212 &314510069
 SpriteRenderer:
   m_ObjectHideFlags: 0
