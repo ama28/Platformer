@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Ghost
   - Enemy
+  - OneWayPlatform
   layers:
   - Default
   - TransparentFX
