@@ -462,7 +462,6 @@ GameObject:
   - component: {fileID: 1123386416}
   - component: {fileID: 1123386415}
   - component: {fileID: 1123386414}
-  - component: {fileID: 1123386413}
   - component: {fileID: 1123386418}
   m_Layer: 0
   m_Name: player
@@ -471,20 +470,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1123386413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123386412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a44f01f65d2846058c81c6b0460d943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashSpeed: 50
-  startDashTime: 0.1
 --- !u!50 &1123386414
 Rigidbody2D:
   serializedVersion: 4
@@ -609,12 +594,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a893c878e442ee8830db354325c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  ghostPrefab: {fileID: 0}
   jump_force: 20
-  ghost: {fileID: 0}
-  delay_secs: 1.2
+  movementVector: {x: 0, y: 0}
+  rewindTeleportSpeed: 5
   rewind_cooldown: 0.8
-  gravity_multiplier: 5
+  time_stationary: 0
+  is_moving: 0
+  dashPower: 0
+  dashTime: 0
+  baseSpeed: 0
 --- !u!1 &2100464022
 GameObject:
   m_ObjectHideFlags: 0
