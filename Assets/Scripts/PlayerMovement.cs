@@ -31,10 +31,10 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed;
     public float dashPower;
     public float dashTime;
-    bool isDashing;
+    bool isDashing = false;
     float vertical; 
     float horizontal;
-    bool isGrounded; 
+    public bool isGrounded; 
     float initY;
 
     void Start()
@@ -67,15 +67,30 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Dash()
+    IEnumerator Dash(int direction) //0 = horizontal, 1 = vertical, 2 = diagonal
     {
         float temp = my_rigbod.gravityScale;
         my_rigbod.gravityScale = 0;
 
         isDashing = true;
         currentSpeed *= dashPower; //dash
+
+        switch (direction)
+        {
+            case 0:
+                movementVector = new Vector2(horizontal * currentSpeed, 0);
+                break;
+            case 1:
+                movementVector = new Vector2(0, vertical * currentSpeed);
+                break;
+            case 2:
+                movementVector = new Vector2(horizontal * currentSpeed, vertical * currentSpeed);
+                break;
+        }
+
         yield return new WaitForSeconds(dashTime); //wait before finish dashing
 
+        movementVector = new Vector2(0, 0);
         my_rigbod.gravityScale = temp;
         currentSpeed = baseSpeed; //stop dash
         isDashing = false;
@@ -88,6 +103,11 @@ public class PlayerMovement : MonoBehaviour
             RestartScene();
         }
 
+        if (isGrounded)
+        {
+            movementVector = new Vector2(my_rigbod.velocity.x, 0);
+        }
+
         //get movement inputs
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
@@ -95,27 +115,24 @@ public class PlayerMovement : MonoBehaviour
 
         //dash stuff
         if (Input.GetKeyDown(KeyCode.LeftShift)){
-            if(!isDashing && !isGrounded && horizontal == 0 && vertical < 0){ //mid-air down dash
-                StartCoroutine(Dash());
-                movementVector = new Vector2(0, vertical * currentSpeed);
-            }
+            //if(!isDashing && !isGrounded && horizontal == 0 && vertical < 0){ //mid-air down dash
+            //    StartCoroutine(Dash());
+            //    movementVector = new Vector2(0, vertical * currentSpeed);
+            //}
             if(!isDashing && isGrounded){
                 if(vertical == 0 && horizontal != 0){ //horizontal dash
-                    StartCoroutine(Dash());
-                    movementVector = new Vector2(horizontal * currentSpeed, 0);
+                    StartCoroutine(Dash(0));
                     if(!canFakeDoubleJump)
                         isGrounded = false;
                 }
                 if(horizontal == 0 && vertical != 0){ //vertical dash
-                    StartCoroutine(Dash());
-                    movementVector = new Vector2(0, vertical * currentSpeed);
+                    StartCoroutine(Dash(1));
                     if(vertical > 0){
                         isGrounded = false;
                     }
                 }
                 if(vertical != 0  && horizontal != 0){ //diagonal dash
-                    StartCoroutine(Dash());
-                    movementVector = new Vector2(horizontal * currentSpeed, vertical * currentSpeed); 
+                    StartCoroutine(Dash(2));
                     isGrounded = false;
                 }
 
@@ -132,12 +149,12 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(TurnOnGravity());
             }
         }
-        else{ //normal left right movement
+
+        if (!isDashing){ //normal left right movement
             movementVector = new Vector2(horizontal * currentSpeed, my_rigbod.velocity.y);
         }
 
         //execute movement
-        my_rigbod.velocity = movementVector;
 
         //decide whether adjustment is needed – set time statioinary
         is_moving = my_rigbod.velocity.magnitude > 0;
@@ -174,6 +191,8 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
+        my_rigbod.velocity = movementVector;
+
         //StartCoroutine(FollowMe(movementVector, time_stationary));
         //jump button input
         if (Input.GetButton("Jump") &&
