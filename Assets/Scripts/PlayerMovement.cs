@@ -25,7 +25,8 @@ public class PlayerMovement : MonoBehaviour
     public float time_stationary;
     public bool is_moving;
 
-    public Animator playerAnimator; 
+    private Animator playerAnimator;
+    public bool isGrounded;
 
     //dash stuff
     private float currentSpeed;
@@ -101,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         print(IsGrounded());
+        isGrounded = IsGrounded();
 
         if (Input.GetKeyDown(KeyCode.R))
         {
