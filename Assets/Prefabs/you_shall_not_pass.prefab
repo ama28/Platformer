@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6438509394401631117}
   - component: {fileID: 6438509394401631118}
   - component: {fileID: 6438509394401631119}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: you_shall_not_pass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

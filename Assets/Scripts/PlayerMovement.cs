@@ -34,12 +34,13 @@ public class PlayerMovement : MonoBehaviour
     bool isDashing = false;
     float vertical; 
     float horizontal;
-    public bool isGrounded; 
-    float initY;
+    BoxCollider2D boxCollider2d;
+    [SerializeField] private LayerMask platformLayerMask;
 
     void Start()
     {
         my_rigbod = GetComponent<Rigidbody2D>();
+        boxCollider2d = GetComponent<BoxCollider2D>();
 
         ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
         ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
@@ -52,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
         //dash stuff
         currentSpeed = baseSpeed;
         isDashing = false;
-        isGrounded = true;
     }
 
     void OnCollisionStay2D(Collision2D collision) //kill enemy w dash & check grounded
@@ -60,10 +60,6 @@ public class PlayerMovement : MonoBehaviour
         if(collision.gameObject.tag == "Enemy" && isDashing)
         {
             Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
         }
     }
 
@@ -96,14 +92,22 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
     }
 
+    private bool IsGrounded() {
+        float extraHeightText = 1f;
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0, Vector2.down, extraHeightText, platformLayerMask);
+        return raycastHit.collider != null;
+    }
+
     private void Update()
     {
+        print(IsGrounded());
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             RestartScene();
         }
 
-        if (isGrounded)
+        if (IsGrounded())
         {
             movementVector = new Vector2(my_rigbod.velocity.x, 0);
         }
@@ -119,21 +123,15 @@ public class PlayerMovement : MonoBehaviour
             //    StartCoroutine(Dash());
             //    movementVector = new Vector2(0, vertical * currentSpeed);
             //}
-            if(!isDashing && isGrounded){
+            if(!isDashing && IsGrounded()){
                 if(vertical == 0 && horizontal != 0){ //horizontal dash
                     StartCoroutine(Dash(0));
-                    if(!canFakeDoubleJump)
-                        isGrounded = false;
                 }
                 if(horizontal == 0 && vertical != 0){ //vertical dash
                     StartCoroutine(Dash(1));
-                    if(vertical > 0){
-                        isGrounded = false;
-                    }
                 }
                 if(vertical != 0  && horizontal != 0){ //diagonal dash
                     StartCoroutine(Dash(2));
-                    isGrounded = false;
                 }
 
                 //REMOVE FREEZE
