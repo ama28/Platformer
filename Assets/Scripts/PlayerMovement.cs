@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float rewind_cooldown = 3.0f; // cooldown before rewinding again
 
-    private bool canFakeDoubleJump; // for rewind jump
+    public bool canDoubleJump = true; // for rewind jump
     public float time_stationary;
     public bool is_moving;
 
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed;
     public float dashPower;
     public float dashTime;
-    bool isDashing = false;
+    public bool isDashing = false;
     float vertical; 
     float horizontal;
     BoxCollider2D boxCollider2d;
@@ -104,14 +104,14 @@ public class PlayerMovement : MonoBehaviour
         print(IsGrounded());
         isGrounded = IsGrounded();
 
+        if (isGrounded)
+        {
+            canDoubleJump = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             RestartScene();
-        }
-
-        if (IsGrounded())
-        {
-            movementVector = new Vector2(my_rigbod.velocity.x, 0);
         }
 
         //get movement inputs
@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
             //    StartCoroutine(Dash());
             //    movementVector = new Vector2(0, vertical * currentSpeed);
             //}
-            if(!isDashing && IsGrounded()){
+            if(!isDashing && canDoubleJump){
                 if(vertical == 0 && horizontal != 0){ //horizontal dash
                     StartCoroutine(Dash(0));
                 }
@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
                     StartCoroutine(Dash(2));
                 }
 
-                //REMOVE FREEZE
+                canDoubleJump = false;
 
                 //re-enable trail
                 GetComponent<TrailRenderer>().enabled = true;
@@ -196,12 +196,10 @@ public class PlayerMovement : MonoBehaviour
         //StartCoroutine(FollowMe(movementVector, time_stationary));
         //jump button input
         if (Input.GetButton("Jump") &&
-            ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f) ||
-            canFakeDoubleJump)) 
+            ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f))) 
         {
             //jump
             my_rigbod.velocity = new Vector3(0, jump_force, 0);
-            canFakeDoubleJump = false;
             //isGrounded = false;
         }
     }
@@ -215,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
         ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
         ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
 
-        canFakeDoubleJump = true;
+        canDoubleJump = true;
 
         //GetComponent<TrailRenderer>().enabled = true;
     }
