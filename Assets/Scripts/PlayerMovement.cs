@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     public float time_stationary;
     public bool is_moving;
 
+    public Animator playerAnimator; 
+
     //dash stuff
     private float currentSpeed;
     public float dashPower;
@@ -44,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
         delay = ghost.GetComponent<Ghost>().delay_secs;
         time_stationary = 0f;
+
+        playerAnimator = GetComponent<Animator>();
 
         //dash stuff
         currentSpeed = baseSpeed;
@@ -65,18 +69,14 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Dash()
     {
+        float temp = my_rigbod.gravityScale;
+        my_rigbod.gravityScale = 0;
+
         isDashing = true;
         currentSpeed *= dashPower; //dash
         yield return new WaitForSeconds(dashTime); //wait before finish dashing
-        currentSpeed = baseSpeed; //stop dash
-        isDashing = false;
-    }
 
-    IEnumerator DashDiag()
-    {
-        isDashing = true;
-        currentSpeed += 2.8f * dashPower; //dash
-        yield return new WaitForSeconds(dashTime * 2); //wait before finish dashing
+        my_rigbod.gravityScale = temp;
         currentSpeed = baseSpeed; //stop dash
         isDashing = false;
     }
@@ -91,29 +91,30 @@ public class PlayerMovement : MonoBehaviour
         //get movement inputs
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+        playerAnimator.SetFloat("Speed", Mathf.Abs(horizontal));
 
         //dash stuff
-        if(Input.GetKeyDown(KeyCode.K)){
+        if (Input.GetKeyDown(KeyCode.LeftShift)){
             if(!isDashing && !isGrounded && horizontal == 0 && vertical < 0){ //mid-air down dash
                 StartCoroutine(Dash());
-                movementVector = new Vector2(my_rigbod.velocity.x, vertical * currentSpeed);
+                movementVector = new Vector2(0, vertical * currentSpeed);
             }
             if(!isDashing && isGrounded){
                 if(vertical == 0 && horizontal != 0){ //horizontal dash
                     StartCoroutine(Dash());
-                    movementVector = new Vector2(horizontal * currentSpeed, my_rigbod.velocity.y);
+                    movementVector = new Vector2(horizontal * currentSpeed, 0);
                     if(!canFakeDoubleJump)
                         isGrounded = false;
                 }
                 if(horizontal == 0 && vertical != 0){ //vertical dash
                     StartCoroutine(Dash());
-                    movementVector = new Vector2(my_rigbod.velocity.x, vertical * currentSpeed);
+                    movementVector = new Vector2(0, vertical * currentSpeed);
                     if(vertical > 0){
                         isGrounded = false;
                     }
                 }
                 if(vertical != 0  && horizontal != 0){ //diagonal dash
-                    StartCoroutine(DashDiag());
+                    StartCoroutine(Dash());
                     movementVector = new Vector2(horizontal * currentSpeed, vertical * currentSpeed); 
                     isGrounded = false;
                 }
@@ -155,6 +156,19 @@ public class PlayerMovement : MonoBehaviour
             my_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
             ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
             ghost_rigbod.gravityScale = 0;
+        }
+
+        //make sure player faces right direction
+        if (horizontal < 0)
+        {
+            //character faces left
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        if (horizontal > 0)
+        {
+            //character faces right
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
     }
     
