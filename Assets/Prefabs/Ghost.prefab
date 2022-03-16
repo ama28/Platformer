@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6834811480a4ed7a84319f79592be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  obstructions: []
+  isDashing: 0
+  dashXVelocity: 9
   delay_secs: 1.2
 --- !u!50 &3543884854104081088
 Rigidbody2D:

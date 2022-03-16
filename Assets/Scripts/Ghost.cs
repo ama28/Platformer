@@ -9,36 +9,59 @@ public class Ghost : MonoBehaviour
     private GameObject player;
     private PlayerMovement moveScript;
     private Animator ghostAnimator;
-    public GameObject[] enemies;
+    public GameObject enemy;
     public GameObject[] obstructions;
     public bool isDashing = false;
     public float dashXVelocity;
     public float delay_secs = 1.2f; // amount of delay between ghost and player
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         moveScript = player.GetComponent<PlayerMovement>();
         ghostAnimator = GetComponent<Animator>();
 
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
         obstructions = GameObject.FindGameObjectsWithTag("Obstruction");
 
         //prevent collision between ghost and player
         myCollider = GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(myCollider, player.GetComponent<Collider2D>());
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            Physics2D.IgnoreCollision(myCollider, enemies[i].GetComponent<Collider2D>());
-        }
-        for (int i = 0; i < enemies.Length; i++)
+        Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>());
+        for (int i = 0; i < obstructions.Length; i++)
         {
             Physics2D.IgnoreCollision(myCollider, obstructions[i].GetComponent<Collider2D>());
         }
 
         //make ghost gravity scale match player
+    }
+
+    void OnCollisionStay2D(Collision2D collision) //kill enemy w dash & check grounded
+    {
+        if (collision.gameObject.tag == "Enemy" && isDashing)
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (Mathf.Abs(myRigidbody.velocity.x) >= dashXVelocity - 1)
+            isDashing = true;
+        else isDashing = false;
+
+        if (isDashing && enemy != null)
+        {
+            Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>(), false);
+            Physics2D.IgnoreCollision(myCollider, obstructions[0].GetComponent<Collider2D>(), false);
+        }
+        else if (enemy != null)
+        {
+            Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(myCollider, obstructions[0].GetComponent<Collider2D>());
+        }
     }
 
     // Update is called once per frame

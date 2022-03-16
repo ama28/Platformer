@@ -107,7 +107,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        print(IsGrounded());
         isGrounded = IsGrounded();
 
         if (isGrounded)
@@ -178,17 +177,18 @@ public class PlayerMovement : MonoBehaviour
             ghost_rigbod.gravityScale = 0;
         }
 
+        SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
         //make sure player faces right direction
         if (horizontal < 0)
         {
             //character faces left
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            mySprite.flipX = true;
         }
 
         if (horizontal > 0)
         {
             //character faces right
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
+            mySprite.flipX = false;
         }
     }
     
