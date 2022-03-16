@@ -90,6 +90,12 @@ public class PlayerMovement : MonoBehaviour
         movementVector = new Vector2(0, 0);
         my_rigbod.gravityScale = temp;
         currentSpeed = baseSpeed; //stop dash
+        StartCoroutine(Test());
+    }
+
+    IEnumerator Test()
+    {
+        yield return new WaitForSeconds(.01f);
         isDashing = false;
     }
 
@@ -121,18 +127,14 @@ public class PlayerMovement : MonoBehaviour
 
         //dash stuff
         if (Input.GetKeyDown(KeyCode.LeftShift)){
-            //if(!isDashing && !isGrounded && horizontal == 0 && vertical < 0){ //mid-air down dash
-            //    StartCoroutine(Dash());
-            //    movementVector = new Vector2(0, vertical * currentSpeed);
-            //}
             if(!isDashing && canDoubleJump){
-                if(vertical == 0 && horizontal != 0){ //horizontal dash
+                if((vertical == 0 && horizontal != 0)){ //horizontal dash
                     StartCoroutine(Dash(0));
                 }
-                if(horizontal == 0 && vertical != 0){ //vertical dash
+                else if(vertical != 0 && horizontal == 0){ //vertical dash
                     StartCoroutine(Dash(1));
                 }
-                if(vertical != 0  && horizontal != 0){ //diagonal dash
+                else if(vertical != 0  && horizontal != 0){ //diagonal dash
                     StartCoroutine(Dash(2));
                 }
 
@@ -155,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //execute movement
+        my_rigbod.velocity = movementVector;
 
         //decide whether adjustment is needed – set time statioinary
         is_moving = my_rigbod.velocity.magnitude > 0;
@@ -191,8 +194,6 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
-        my_rigbod.velocity = movementVector;
-
         //StartCoroutine(FollowMe(movementVector, time_stationary));
         //jump button input
         if (Input.GetButton("Jump") &&
