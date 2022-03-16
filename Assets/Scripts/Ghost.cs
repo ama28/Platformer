@@ -10,6 +10,8 @@ public class Ghost : MonoBehaviour
     private PlayerMovement moveScript;
     private Animator ghostAnimator;
     public GameObject[] enemies;
+    public bool isDashing = false;
+    public float dashXVelocity;
     public float delay_secs = 1.2f; // amount of delay between ghost and player
 
     // Start is called before the first frame update
