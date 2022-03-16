@@ -90,10 +90,10 @@ public class PlayerMovement : MonoBehaviour
         movementVector = new Vector2(0, 0);
         my_rigbod.gravityScale = temp;
         currentSpeed = baseSpeed; //stop dash
-        StartCoroutine(NoLongerDashing());
+        StartCoroutine(Test());
     }
 
-    IEnumerator NoLongerDashing()
+    IEnumerator Test()
     {
         yield return new WaitForSeconds(.01f);
         isDashing = false;
@@ -141,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
                 canDoubleJump = false;
 
                 //re-enable trail
+                GetComponent<TrailRenderer>().enabled = true;
 
                 //unfreeze player
                 my_rigbod.constraints = RigidbodyConstraints2D.None;
@@ -177,27 +178,30 @@ public class PlayerMovement : MonoBehaviour
             ghost_rigbod.gravityScale = 0;
         }
 
-        SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
         //make sure player faces right direction
         if (horizontal < 0)
         {
             //character faces left
-            mySprite.flipX = true;
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
+
         if (horizontal > 0)
         {
-            mySprite.flipX = false;
+            //character faces right
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
     }
     
     void FixedUpdate()
     {
+        //StartCoroutine(FollowMe(movementVector, time_stationary));
         //jump button input
         if (Input.GetButton("Jump") &&
             ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f))) 
         {
             //jump
             my_rigbod.velocity = new Vector3(0, jump_force, 0);
+            //isGrounded = false;
         }
     }
 
@@ -211,6 +215,8 @@ public class PlayerMovement : MonoBehaviour
         ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
 
         canDoubleJump = true;
+
+        //GetComponent<TrailRenderer>().enabled = true;
     }
 
     private IEnumerator TurnOnGravity()
@@ -219,7 +225,6 @@ public class PlayerMovement : MonoBehaviour
         ghost_rigbod.gravityScale = GetComponent<Rigidbody2D>().gravityScale;
         ghost_rigbod.constraints = RigidbodyConstraints2D.None;
         ghost_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
-        GetComponent<TrailRenderer>().enabled = true;
     }
 
     void RestartScene()
