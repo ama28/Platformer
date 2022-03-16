@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), speed * Time.deltaTime);
         if(target.position.x - transform.position.x > 0)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
