@@ -8,6 +8,7 @@ TagManager:
   - Ghost
   - Enemy
   - OneWayPlatform
+  - Obstruction
   layers:
   - Default
   - TransparentFX

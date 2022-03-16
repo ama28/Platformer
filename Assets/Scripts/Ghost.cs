@@ -10,6 +10,7 @@ public class Ghost : MonoBehaviour
     private PlayerMovement moveScript;
     private Animator ghostAnimator;
     public GameObject[] enemies;
+    public GameObject[] obstructions;
     public bool isDashing = false;
     public float dashXVelocity;
     public float delay_secs = 1.2f; // amount of delay between ghost and player
@@ -23,6 +24,7 @@ public class Ghost : MonoBehaviour
         ghostAnimator = GetComponent<Animator>();
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        obstructions = GameObject.FindGameObjectsWithTag("Obstruction");
 
         //prevent collision between ghost and player
         myCollider = GetComponent<Collider2D>();
@@ -30,6 +32,10 @@ public class Ghost : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             Physics2D.IgnoreCollision(myCollider, enemies[i].GetComponent<Collider2D>());
+        }
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Physics2D.IgnoreCollision(myCollider, obstructions[i].GetComponent<Collider2D>());
         }
 
         //make ghost gravity scale match player
