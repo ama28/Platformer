@@ -20,15 +20,14 @@ public class DialogueManager : MonoBehaviour
         NPC_textBar = canvas.Find("TextBar").gameObject;
 
         GameObject player_canvas = GameObject.FindGameObjectWithTag("Player");
-        player_textBar = player_canvas.transform.Find("Canvas").Find("TextBar").gameObject;
+        //player_textBar = player_canvas.transform.Find("Canvas").Find("TextBar").gameObject;
         
         //disable all canvas component
         for (int i = 0; i < canvas.childCount; i++)
         {
             canvas.GetChild(i).gameObject.SetActive(false);
-    
         }
-        player_textBar.SetActive(false);
+        //player_textBar.SetActive(false);
         canTalk = false;
         NPC_talking = true;
         doneTalking = false;
