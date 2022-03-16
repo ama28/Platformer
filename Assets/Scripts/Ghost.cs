@@ -9,6 +9,7 @@ public class Ghost : MonoBehaviour
     private GameObject player;
     private PlayerMovement moveScript;
     private Animator ghostAnimator;
+    public GameObject[] enemies;
     public float delay_secs = 1.2f; // amount of delay between ghost and player
 
     // Start is called before the first frame update
@@ -19,9 +20,15 @@ public class Ghost : MonoBehaviour
         moveScript = player.GetComponent<PlayerMovement>();
         ghostAnimator = GetComponent<Animator>();
 
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
         //prevent collision between ghost and player
         myCollider = GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(myCollider, player.GetComponent<Collider2D>());
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Physics2D.IgnoreCollision(myCollider, enemies[i].GetComponent<Collider2D>());
+        }
 
         //make ghost gravity scale match player
     }

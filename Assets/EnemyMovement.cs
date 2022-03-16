@@ -6,21 +6,26 @@ public class EnemyMovement : MonoBehaviour
 {
     public float speed;
     Transform target;
+    private Animator myAnim;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        myAnim = GetComponent<Animator>();
     }
 
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), speed * Time.deltaTime);
-        if(target.position.x - transform.position.x > 0)
+        myAnim.SetFloat("GuardSpeed", Mathf.Abs(target.position.x - transform.position.x));
+
+        if (target.position.x > transform.position.x)
+        {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
-        else{
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
     }
 }
