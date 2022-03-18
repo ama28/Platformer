@@ -8,7 +8,7 @@ public class EnemyProjectile : MonoBehaviour
     public float fire_speed = 20f; 
     void Update()
     {
-        transform.position += transform.right * Time.deltaTime * fire_speed;
+        transform.position -= transform.right * Time.deltaTime * fire_speed;
     }
 
     void OnTriggerEnter2D(Collider2D other)

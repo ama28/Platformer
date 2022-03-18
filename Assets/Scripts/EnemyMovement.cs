@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
     public float speed;
     Transform target;
     private Animator myAnim;
+    public GameObject endScreen;
 
     void Start()
     {
@@ -27,5 +28,10 @@ public class EnemyMovement : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
+    }
+
+    private void OnDestroy()
+    {
+        endScreen.SetActive(true);
     }
 }
