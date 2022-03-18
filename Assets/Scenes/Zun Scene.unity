@@ -3056,8 +3056,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990679114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.05, y: -5.78, z: 0}
-  m_LocalScale: {x: 7.2824006, y: 1.2699422, z: 1}
+  m_LocalPosition: {x: -7.7, y: -5.79, z: 0}
+  m_LocalScale: {x: 10.559482, y: 1.2699422, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
@@ -4233,8 +4233,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447400890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.07, y: -2.56, z: 0}
-  m_LocalScale: {x: 7.1648498, y: 2.587507, z: 1}
+  m_LocalPosition: {x: -7.62, y: -2.56, z: 0}
+  m_LocalScale: {x: 9.851668, y: 2.587507, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 19
@@ -6050,7 +6050,7 @@ PrefabInstance:
       objectReference: {fileID: 4225074215349839096, guid: 45e6d04765bd84f049bb604ccbb2e1f0, type: 3}
     - target: {fileID: 4679526048886547642, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
       propertyPath: fireRate
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4679526048886547644, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
       propertyPath: m_Color.b

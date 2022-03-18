@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
                 else if(vertical != 0  && horizontal != 0){ //diagonal dash
                     StartCoroutine(Dash(2));
                 }
-
+                Time.timeScale = 1f;
                 canDoubleJump = false;
 
                 //re-enable trail
@@ -170,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
             //disable trail then rewind
             GetComponent<TrailRenderer>().enabled = false;
             Rewind();
-
+            Time.timeScale = 0f;
             //freeze player & ghost
             my_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
             ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
