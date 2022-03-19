@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 513177053be8e4fa8aec4ed2841575cf
+guid: 42dface114adf45fba3a78a687f2ff23
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5192771802172812740
-    second: Backslash_Run_0
+      213: 4277716681698382911
+    second: Backslash_Run 2_0
   - first:
-      213: -6626865290736701643
-    second: Backslash_Run_1
+      213: -6597978525038731623
+    second: Backslash_Run 2_1
   - first:
-      213: -6308028674119780042
-    second: Backslash_Run_2
+      213: 9127146731597538679
+    second: Backslash_Run 2_2
   - first:
-      213: 5834560067461720141
-    second: Backslash_Run_3
+      213: 1018622599985788324
+    second: Backslash_Run 2_3
   - first:
-      213: -341792859524077317
-    second: Backslash_Run_4
+      213: 5212855667448536037
+    second: Backslash_Run 2_4
   - first:
-      213: 7840298750322051060
-    second: Backslash_Run_5
+      213: -895622399613563044
+    second: Backslash_Run 2_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,7 +121,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Backslash_Run_0
+      name: Backslash_Run 2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,14 +135,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3213d3fe819fe7b0800000000000000
-      internalID: -5192771802172812740
+      spriteID: f34156e58a08d5b30800000000000000
+      internalID: 4277716681698382911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Run_1
+      name: Backslash_Run 2_1
       rect:
         serializedVersion: 2
         x: 128
@@ -156,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53fe543f025a804a0800000000000000
-      internalID: -6626865290736701643
+      spriteID: 99e19633d754f64a0800000000000000
+      internalID: -6597978525038731623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Run_2
+      name: Backslash_Run 2_2
       rect:
         serializedVersion: 2
         x: 256
@@ -177,14 +177,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 639bc1e97516578a0800000000000000
-      internalID: -6308028674119780042
+      spriteID: 7752dbd38932aae70800000000000000
+      internalID: 9127146731597538679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Run_3
+      name: Backslash_Run 2_3
       rect:
         serializedVersion: 2
         x: 0
@@ -198,14 +198,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d482cb1f77588f050800000000000000
-      internalID: 5834560067461720141
+      spriteID: 4a576589bdfd22e00800000000000000
+      internalID: 1018622599985788324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Run_4
+      name: Backslash_Run 2_4
       rect:
         serializedVersion: 2
         x: 128
@@ -219,14 +219,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf86d458435b14bf0800000000000000
-      internalID: -341792859524077317
+      spriteID: 5ebd6a35c98c75840800000000000000
+      internalID: 5212855667448536037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Run_5
+      name: Backslash_Run 2_5
       rect:
         serializedVersion: 2
         x: 256
@@ -240,8 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f782e97c265ecc60800000000000000
-      internalID: 7840298750322051060
+      spriteID: c5f862a3c2c1293f0800000000000000
+      internalID: -895622399613563044
       vertices: []
       indices: 
       edges: []

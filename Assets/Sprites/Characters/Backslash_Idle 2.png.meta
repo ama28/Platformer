@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 8c17c01a461124790af61f29f9182cd6
+guid: fddb50c7b0ba34ea29c087fdee769735
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -808864030858422523
-    second: Backslash_Idle_0
+      213: 1276963608331548304
+    second: Backslash_Idle 2_0
   - first:
-      213: -7634286885125540151
-    second: Backslash_Idle_1
+      213: -5116387488192009090
+    second: Backslash_Idle 2_1
   - first:
-      213: -5994056178026049497
-    second: Backslash_Idle_2
+      213: 8183324705068234509
+    second: Backslash_Idle 2_2
   - first:
-      213: 8437788690974667415
-    second: Backslash_Idle_3
+      213: 3787820992682965509
+    second: Backslash_Idle 2_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Backslash_Idle_0
+      name: Backslash_Idle 2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,20 +123,20 @@ TextureImporter:
         width: 128
         height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 507d711137656c4f0800000000000000
-      internalID: -808864030858422523
+      spriteID: 096f3b9d2afa8b110800000000000000
+      internalID: 1276963608331548304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Idle_1
+      name: Backslash_Idle 2_1
       rect:
         serializedVersion: 2
         x: 128
@@ -144,20 +144,20 @@ TextureImporter:
         width: 128
         height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c63ba2b6809d0690800000000000000
-      internalID: -7634286885125540151
+      spriteID: e7cef01ffa0fef8b0800000000000000
+      internalID: -5116387488192009090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Idle_2
+      name: Backslash_Idle 2_2
       rect:
         serializedVersion: 2
         x: 0
@@ -165,20 +165,20 @@ TextureImporter:
         width: 128
         height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7209509f9a5d0dca0800000000000000
-      internalID: -5994056178026049497
+      spriteID: d07354f4672019170800000000000000
+      internalID: 8183324705068234509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Backslash_Idle_3
+      name: Backslash_Idle 2_3
       rect:
         serializedVersion: 2
         x: 128
@@ -186,14 +186,14 @@ TextureImporter:
         width: 128
         height: 106
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7927a5feb1c091570800000000000000
-      internalID: 8437788690974667415
+      spriteID: 50ab2a5cf1b019430800000000000000
+      internalID: 3787820992682965509
       vertices: []
       indices: 
       edges: []

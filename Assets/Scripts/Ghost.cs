@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Ghost : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class Ghost : MonoBehaviour
     private GameObject player;
     private PlayerMovement moveScript;
     private Animator ghostAnimator;
-    public GameObject enemy;
-    public GameObject[] obstructions;
     public bool isDashing = false;
     public float dashXVelocity;
     public float delay_secs = 1.2f; // amount of delay between ghost and player
@@ -23,16 +22,17 @@ public class Ghost : MonoBehaviour
         moveScript = player.GetComponent<PlayerMovement>();
         ghostAnimator = GetComponent<Animator>();
 
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
-        obstructions = GameObject.FindGameObjectsWithTag("Obstruction");
+        GameObject[] obstructions = GameObject.FindGameObjectsWithTag("Obstruction");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        GameObject[] collisionsToIgnore = obstructions.Concat(enemies).ToArray();
 
         //prevent collision between ghost and player
         myCollider = GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(myCollider, player.GetComponent<Collider2D>());
-        Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>());
-        for (int i = 0; i < obstructions.Length; i++)
+        for (int i = 0; i < collisionsToIgnore.Length; i++)
         {
-            Physics2D.IgnoreCollision(myCollider, obstructions[i].GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(myCollider, collisionsToIgnore[i].GetComponent<Collider2D>());
         }
 
         //make ghost gravity scale match player
@@ -48,20 +48,21 @@ public class Ghost : MonoBehaviour
 
     private void Update()
     {
-        if (Mathf.Abs(myRigidbody.velocity.x) >= dashXVelocity - 1)
-            isDashing = true;
-        else isDashing = false;
+        //ghost to dash through enemy code
+        //if (Mathf.Abs(myRigidbody.velocity.x) >= dashXVelocity - 1)
+        //    isDashing = true;
+        //else isDashing = false;
 
-        if (isDashing && enemy != null)
-        {
-            Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>(), false);
-            Physics2D.IgnoreCollision(myCollider, obstructions[0].GetComponent<Collider2D>(), false);
-        }
-        else if (enemy != null)
-        {
-            Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(myCollider, obstructions[0].GetComponent<Collider2D>());
-        }
+        //if (isDashing && enemy != null)
+        //{
+        //    Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>(), false);
+        //    Physics2D.IgnoreCollision(myCollider, obstructions[0].GetComponent<Collider2D>(), false);
+        //}
+        //else if (enemy != null)
+        //{
+        //    Physics2D.IgnoreCollision(myCollider, enemy.GetComponent<Collider2D>());
+        //    Physics2D.IgnoreCollision(myCollider, obstructions[0].GetComponent<Collider2D>());
+        //}
     }
 
     // Update is called once per frame

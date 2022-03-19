@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class GuardEnemy : MonoBehaviour
 {
     public float speed;
     Transform target;
     private Animator myAnim;
-    public GameObject endScreen;
+    public float delay = 2f;
 
     void Start()
     {
@@ -28,10 +28,5 @@ public class EnemyMovement : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-    }
-
-    private void OnDestroy()
-    {
-        endScreen.SetActive(true);
     }
 }
