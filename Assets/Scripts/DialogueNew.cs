@@ -33,13 +33,20 @@ public class DialogueNew : MonoBehaviour
 
 
         //initialize the text obtaining from another script
+        current_line = 0;
+
+        //load resources
+        var textFile = Resources.Load<TextAsset>(script_name);
+        //print(textFile.text);
+        player_lines = textFile.text.Split('\n');
+        //player_lines = gameObject.GetComponent<lines>().sentences;
     }
 
     // Update is called once per frame
     void Update()
     {
        
-        if (!isTalking & Input.GetKeyDown(KeyCode.F))
+        if (!isTalking && Input.GetKeyDown(KeyCode.F) && current_line < player_lines.Length)
         {
             //typing effect
             StartCoroutine(typeOut(player_lines[current_line], my_textBar));
@@ -47,7 +54,16 @@ public class DialogueNew : MonoBehaviour
             //canTalk = false;
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.F) && current_line == player_lines.Length)
+        {
+            //disable all canvas components
+            for (int i = 0; i < canvas.childCount; i++)
+            {
+                canvas.GetChild(i).gameObject.SetActive(false);
+            }
+            //maybe change this latter
+        }
+
     }
 
     private IEnumerator typeOut(string line, GameObject textBar)
@@ -79,6 +95,7 @@ public class DialogueNew : MonoBehaviour
         textBar.transform.Find("Text").GetComponent<Text>().text = line;
         isTalking = false;//finish talking
         //next line
+        current_line++;
         
         //yield return new WaitForSeconds(textBar_showDelay);
 
