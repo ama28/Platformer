@@ -3,60 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueNew : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform canvas;
-    public bool canTalk, NPC_talking, doneTalking;
+    //public bool canTalk, NPC_talking, doneTalking;
     //NPC talking represents who talks first
-    public string NPC_line, player_line;
+    
+    //this script is directly attached to canvas
+    public string[] player_lines;
     public float typingSpeed;
     public float textBar_showDelay;
+    public int current_line;
+    public string script_name;
 
-    private GameObject NPC_textBar;
-    private GameObject player_textBar;
+    private GameObject my_textBar;
+    private bool isTalking, jumpToEnd;
     void Start()
     {
-        canvas = transform.Find("Canvas");
-        NPC_textBar = canvas.Find("TextBar").gameObject;
+        canvas = transform;
+        my_textBar = transform.Find("TextBar").gameObject;
 
-        GameObject player_canvas = GameObject.FindGameObjectWithTag("Player");
-        //player_textBar = player_canvas.transform.Find("Canvas").Find("TextBar").gameObject;
-        
         //disable all canvas component
         for (int i = 0; i < canvas.childCount; i++)
         {
             canvas.GetChild(i).gameObject.SetActive(false);
         }
-        //player_textBar.SetActive(false);
-        canTalk = false;
-        NPC_talking = true;
-        doneTalking = false;
+        isTalking = false;
+
+
+        //initialize the text obtaining from another script
     }
 
     // Update is called once per frame
     void Update()
-    { 
-        if (canTalk && Input.GetKey(KeyCode.F))
+    {
+       
+        if (!isTalking & Input.GetKeyDown(KeyCode.F))
         {
             //typing effect
-            if(NPC_talking)
-                StartCoroutine(typeOut(NPC_line, NPC_textBar));
-            else
-                StartCoroutine(typeOut(player_line, player_textBar));
-            canTalk = false;
+            StartCoroutine(typeOut(player_lines[current_line], my_textBar));
+            //isTalking = true;
+            //canTalk = false;
         }
 
-        /*if (doneTalking && Input.GetKey(KeyCode.F))
-        {
-            for (int i = 0; i < canvas.childCount; i++)
-            {
-                canvas.GetChild(i).gameObject.SetActive(false);
-
-            }
-            doneTalking = false;
-        }*/
-
+        
     }
 
     private IEnumerator typeOut(string line, GameObject textBar)
@@ -66,7 +57,10 @@ public class DialogueManager : MonoBehaviour
         float timer = 0;
         while (sublen < line.Length)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKeyUp(KeyCode.F))
+                isTalking = true;
+
+            if (isTalking & Input.GetKeyDown(KeyCode.F))
                 break;
             timer += Time.deltaTime * typingSpeed;
             sublen = Mathf.FloorToInt(timer);
@@ -83,22 +77,25 @@ public class DialogueManager : MonoBehaviour
         }
 
         textBar.transform.Find("Text").GetComponent<Text>().text = line;
+        isTalking = false;//finish talking
+        //next line
+        
+        //yield return new WaitForSeconds(textBar_showDelay);
 
-        yield return new WaitForSeconds(textBar_showDelay);
-        //doneTalking = true;
+        //should switch to next line
         //disable all canvas components
-        for (int i = 0; i < canvas.childCount; i++)
+        /*for (int i = 0; i < canvas.childCount; i++)
         {
             canvas.GetChild(i).gameObject.SetActive(false);
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            canvas.Find("CanTalk").gameObject.SetActive(true);
-            canTalk = true;
+            //canvas.Find("CanTalk").gameObject.SetActive(true);
+            //canTalk = true;
         }
     }
 
@@ -108,7 +105,7 @@ public class DialogueManager : MonoBehaviour
         if (other.tag == "Player")
         {
             //print("Exit");
-            canTalk = false;
+            //canTalk = false;
 
             //disable all canvas components
             for (int i = 0; i < canvas.childCount; i++)
@@ -117,7 +114,6 @@ public class DialogueManager : MonoBehaviour
             }
 
         }
-
 
     }
 }
