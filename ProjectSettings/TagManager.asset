@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - OneWayPlatform
   - Obstruction
+  - TextBarPlayer
+  - TextBarNPC
+  - TextIndicator
   layers:
   - Default
   - TransparentFX
