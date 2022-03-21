@@ -56,6 +56,12 @@ public class DialogueFlow : MonoBehaviour
             if (!isTalking && Input.GetKeyDown(KeyCode.F) && current_line < lines.Length)
             {
                 //typing effect
+                //string myLine = lines[current_line];
+
+                //skip the comments line
+                while (lines[current_line][0] == '#')
+                    current_line++;
+
                 string myLine = lines[current_line];
 
                 string header = myLine.Split(':')[0];

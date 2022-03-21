@@ -1,5 +1,6 @@
 n:hi
 n:why are you here
 p:hi
+#this is a comment, a comment starts with '#'
 p:I am a time agent
 p:guess I am stuck in here
