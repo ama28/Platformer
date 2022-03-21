@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Dash(int direction) //0 = horizontal, 1 = vertical, 2 = diagonal
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Slash");
         float temp = my_rigbod.gravityScale;
         my_rigbod.gravityScale = 0;
 
@@ -125,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.SetFloat("Speed", Mathf.Abs(horizontal));
 
         //dash stuff
-        if (Input.GetKeyDown(KeyCode.LeftShift)){
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.LeftShift)){
             if(!isDashing && canDoubleJump){
                 if((vertical == 0 && horizontal != 0)){ //horizontal dash
                     StartCoroutine(Dash(0));
@@ -165,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
         else { time_stationary = 0f; }
 
         //rewind
-        if (Input.GetKeyDown(KeyCode.E)) 
+        if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) 
         {
             //disable trail then rewind
             GetComponent<TrailRenderer>().enabled = false;
@@ -207,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Rewind()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Rewind");
         transform.position = ghost.transform.position;
         Destroy(ghost);
 
