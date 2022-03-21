@@ -5,7 +5,7 @@ using UnityEngine;
 public class PressurePlate : MonoBehaviour
 {
 
-    private bool is_triggered;
+    private bool is_triggered = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
