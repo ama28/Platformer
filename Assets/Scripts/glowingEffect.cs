@@ -13,7 +13,7 @@ public class glowingEffect : MonoBehaviour
     void Start()
     {
         myLight = gameObject.GetComponent<Light2D>();
-        scaleup = false;
+        scaleup = true;
     }
 
     // Update is called once per frame
