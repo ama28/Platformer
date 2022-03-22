@@ -1,0 +1,25 @@
+p:Where...where am I?
+n:OHHOHO!
+n:You finally wake up.
+n:You are here, in my hub!
+p:Hub?
+p:What's all this decoration style? It looks very ancient Asian.
+n:YES! We are in acient asia!
+n:I'm stuck here, just like you!
+n:Nice to see you made the same stupid mistake just like me.
+n:Rewinding to far back, huh?
+n:And if you ever want to go back...
+p:How do I go back?
+n:HOHOH, a little bit of patience, traveler.
+n:To go back, the only way is this time machine I am building!
+n:It is just behind us.
+p:Terrific! Can I use it?
+n:I said I am still building it! 
+n:But you must help me!
+n:There are two missing pieces of the time machine hidden in this place.
+n:One in the night city, the other in the shrine.
+n:Once I aquire the pair, I can get the time machine fully working!
+n:I promise we will get back together.
+p:Okay...sounds doable.
+n:Deal then!
+n:I recommend you start with the night city.
