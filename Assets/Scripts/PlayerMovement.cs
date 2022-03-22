@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
                 movementVector = new Vector2(0, vertical * currentSpeed);
                 break;
             case 2:
-                movementVector = new Vector2(horizontal * currentSpeed, vertical * currentSpeed);
+                movementVector = new Vector2(horizontal * (currentSpeed), vertical * (currentSpeed));
                 break;
         }
 
@@ -91,10 +91,10 @@ public class PlayerMovement : MonoBehaviour
         movementVector = new Vector2(0, 0);
         my_rigbod.gravityScale = temp;
         currentSpeed = baseSpeed; //stop dash
-        StartCoroutine(Test());
+        StartCoroutine(EndDash());
     }
 
-    IEnumerator Test()
+    IEnumerator EndDash()
     {
         yield return new WaitForSeconds(.01f);
         isDashing = false;
@@ -197,8 +197,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //StartCoroutine(FollowMe(movementVector, time_stationary));
         //jump button input
-        if (Input.GetButton("Jump") &&
-            ((Mathf.Abs(my_rigbod.velocity.y) < 0.001f))) 
+        if (Input.GetButton("Jump") && isGrounded) 
         {
             //jump
             my_rigbod.velocity = new Vector3(0, jump_force, 0);
