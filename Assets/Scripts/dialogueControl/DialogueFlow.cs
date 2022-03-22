@@ -9,6 +9,8 @@ public class DialogueFlow : MonoBehaviour
     public GameObject NPC_textBar;
     public GameObject talkIndicator;
 
+    public Rigidbody2D player_rigid2D;//for freezing player
+
     //this script is directly attached to canvas
     public string[] lines;
     public float typingSpeed;
@@ -28,6 +30,8 @@ public class DialogueFlow : MonoBehaviour
         player_textBar = GameObject.FindGameObjectWithTag("TextBarPlayer");
         NPC_textBar = GameObject.FindGameObjectWithTag("TextBarNPC");
         talkIndicator = GameObject.FindGameObjectWithTag("TextIndicator");
+
+        player_rigid2D = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 
         player_textBar.gameObject.SetActive(false);
         NPC_textBar.gameObject.SetActive(false);
@@ -125,5 +129,7 @@ public class DialogueFlow : MonoBehaviour
 
     }
 
-
+    public bool FinishedTalking() {
+        return current_line == lines.Length;
+    }
 }

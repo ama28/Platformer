@@ -13,6 +13,7 @@ TagManager:
   - TextBarNPC
   - TextIndicator
   - Collectible
+  - DialogueManager
   layers:
   - Default
   - TransparentFX
