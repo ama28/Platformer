@@ -59,7 +59,7 @@ public class DialogueFlow : MonoBehaviour
                 //string myLine = lines[current_line];
 
                 //skip the comments line
-                while (lines[current_line][0] == '#')
+                while (current_line < lines.Length && lines[current_line][0] == '#')
                     current_line++;
 
                 string myLine = lines[current_line];
