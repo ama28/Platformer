@@ -12,6 +12,7 @@ TagManager:
   - TextBarPlayer
   - TextBarNPC
   - TextIndicator
+  - Collectible
   layers:
   - Default
   - TransparentFX
