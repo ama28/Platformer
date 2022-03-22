@@ -199,6 +199,8 @@ public class PlayerMovement : MonoBehaviour
         //jump button input
         if (Input.GetButton("Jump") && isGrounded) 
         {
+            //play jump sound
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Jump");
             //jump
             my_rigbod.velocity = new Vector3(0, jump_force, 0);
             //isGrounded = false;
