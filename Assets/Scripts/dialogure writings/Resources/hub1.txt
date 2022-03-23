@@ -1,25 +1,28 @@
-p:Where...where am I?
+p:Wha...where am I?
 n:OHHOHO!
-n:You finally wake up.
-n:You are here, in my hub!
-p:Hub?
-p:What's all this decoration style? It looks very ancient Asian.
-n:YES! We are in acient asia!
-n:I'm stuck here, just like you!
-n:Nice to see you made the same stupid mistake just like me.
-n:Rewinding to far back, huh?
-n:And if you ever want to go back...
-p:How do I go back?
+n:The time travel agent final wakes up!
+n:You are here, in my laboratory!
+p:Laboratory?
+p:What kind of lab has decor like this? It looks straight out of ancient Asia.
+n:That's because we ARE in ancient Asia!
+n:Your rewind device malfunctioned and sent you too far back, as did mine. 
+p:Malfunctioned? It can't be...but these devices only take us backwards!
+p:How am I going to get back to the present? What about my family?
+n:DO NOT FEAR, young agent!
+n:FOR I, ___ HAVE DEVISED A WAY TO RETURN TO THE PRESENT!
+p:You've found a way? What is it? How do we get back?
 n:HOHOH, a little bit of patience, traveler.
-n:To go back, the only way is this time machine I am building!
-n:It is just behind us.
-p:Terrific! Can I use it?
-n:I said I am still building it! 
-n:But you must help me!
-n:There are two missing pieces of the time machine hidden in this place.
-n:One in the night city, the other in the shrine.
-n:Once I aquire the pair, I can get the time machine fully working!
-n:I promise we will get back together.
-p:Okay...sounds doable.
-n:Deal then!
-n:I recommend you start with the night city.
+n:The answer is the machine behind you!
+n:Through the use of certain relics I have found in this time period,
+n:I have been building a device to take us back to the future! 
+n:Unfortunately, it is still incomplete. Some of the relics I need are
+n:protected by defenses, which I, a mere mad scientist, cannot overcome. 
+n:Hmmm, but for a professional, like say, a time travel agent, *wink wink*
+n:these defenses should be no trouble at all! What do you say?
+p:...
+p:I'll help. I need to get back, no matter what. 
+n:PERFECT! There are two missing pieces that I require.
+n:The first part is in the city! Bring it to me, and
+n:I will tell you where to find the next part!
+p:Got it, I'll be right back. 
+n:Also, make sure to pick up any spare parts you see along the way! 

@@ -20,7 +20,7 @@ public class DialogueFlow : MonoBehaviour
 
     public bool canTalk;
     private bool isTalking;
-
+    private bool dialogueSoundPlaying;
 
     void Start()
     {
@@ -76,9 +76,11 @@ public class DialogueFlow : MonoBehaviour
                 NPC_textBar.gameObject.SetActive(false);
 
                 if (header == "p")
-                    StartCoroutine(typeOut(content, player_textBar));
+                {
+                    StartCoroutine(typeOut(content, player_textBar, 0));
+                }
                 else if (header == "n")
-                    StartCoroutine(typeOut(content, NPC_textBar));
+                    StartCoroutine(typeOut(content, NPC_textBar, 1));
             
             }
 
@@ -96,9 +98,11 @@ public class DialogueFlow : MonoBehaviour
 
     }
 
-    private IEnumerator typeOut(string line, GameObject textBar)
+    private IEnumerator typeOut(string line, GameObject textBar, int speaker) //speaker = 0 for player, 1 for scientist
     {
         textBar.SetActive(true);
+        dialogueSoundPlaying = true;
+        StartCoroutine(DialogueSound(speaker));
         int sublen = 0;
         float timer = 0;
         while (sublen < line.Length)
@@ -124,6 +128,7 @@ public class DialogueFlow : MonoBehaviour
 
         textBar.transform.Find("Text").GetComponent<Text>().text = line;
         isTalking = false;//finish talking
+        dialogueSoundPlaying = false;
         //next line
         current_line++;
 
@@ -131,5 +136,17 @@ public class DialogueFlow : MonoBehaviour
 
     public bool FinishedTalking() {
         return current_line == lines.Length;
+    }
+
+    IEnumerator DialogueSound(int speaker)
+    {
+        while (dialogueSoundPlaying)
+        {
+            if (speaker == 0)
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Player Voice");
+            else if (speaker == 1)
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Scientist Voice");
+            yield return new WaitForSeconds(.5f);
+        }
     }
 }
