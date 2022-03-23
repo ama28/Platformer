@@ -7,8 +7,7 @@ public class GuardEnemy : MonoBehaviour
     public float speed;
     Transform target;
     private Animator myAnim;
-    public float delay = 2f;
-    float turnTime = 2f; 
+    public float turnTime = 2f; 
     Vector2 currentTarget;
 
     void Start()
