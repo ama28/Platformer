@@ -6,9 +6,18 @@ using UnityEngine.SceneManagement;
 public class EnemyProjectile : MonoBehaviour
 {
     public float fire_speed = 20f; 
+    Collider2D myCollider;
+
+    void Start()
+    {
+        myCollider = GetComponent<Collider2D>();
+        GameObject ghost = GameObject.FindGameObjectWithTag("Ghost");
+        Physics2D.IgnoreCollision(myCollider, ghost.GetComponent<Collider2D>());
+        
+    }
     void Update()
     {
-        transform.position -= transform.right * Time.deltaTime * fire_speed;
+        transform.position += Vector3.left * Time.deltaTime * fire_speed;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -19,6 +28,12 @@ public class EnemyProjectile : MonoBehaviour
             Destroy(gameObject);
             RestartScene();
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Destroy(gameObject);
+
     }
 
     void RestartScene()

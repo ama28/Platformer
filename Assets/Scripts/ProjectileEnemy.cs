@@ -24,7 +24,7 @@ public class ProjectileEnemy : MonoBehaviour
     {
         if(Time.time > nextFire)
         {
-            Instantiate(bullet, new Vector2(transform.position.x + .5f, transform.position.y) , transform.rotation);
+            Instantiate(bullet, new Vector2(transform.position.x - 1f, transform.position.y) , transform.rotation);
             nextFire = Time.time + fireRate;
         }
     }

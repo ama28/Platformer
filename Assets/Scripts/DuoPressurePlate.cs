@@ -8,7 +8,7 @@ public class DuoPressurePlate : MonoBehaviour
     GameObject door;
 
     bool playerOn = false;
-    bool ghostOn = false;
+    bool enemyOn = false;
     private DuoPlatesDoor door_script;
 
     void Start()
@@ -18,7 +18,7 @@ public class DuoPressurePlate : MonoBehaviour
 
     void Update()
     {
-        print(door_script.platesPressed);
+        //print(door_script.platesPressed);
     }
     
     void OnTriggerEnter2D(Collider2D col)
@@ -31,12 +31,12 @@ public class DuoPressurePlate : MonoBehaviour
             //     door.transform.position += new Vector3(0, 1.2f, 0);
             // }
             playerOn = true;
-            if(!ghostOn)
+            if(!enemyOn)
                 door_script.platesPressed -= 1;
         }
-        if(col.gameObject.tag == "Ghost")
+        if(col.gameObject.tag == "Enemy")
         {
-            ghostOn = true;
+            enemyOn = true;
             if(!playerOn) //not the plate player is already stepping on
             {
                 door_script.platesPressed -= 1;
@@ -48,21 +48,21 @@ public class DuoPressurePlate : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            if(door_script.platesPressed > 0) //door has not opened but player or ghost stepped off plate
-            {
+            //if(!door_script.opened) //door has not opened but player or Enemy stepped off plate
+            //{
                 playerOn = false;
-                if(!ghostOn)
+                if(!enemyOn)
                     door_script.platesPressed += 1;
-            }
+            //}
         }
-        if(col.gameObject.tag == "Ghost")
+        if(col.gameObject.tag == "Enemy")
         {
-            if(door_script.platesPressed > 0) //door has not opened but player or ghost stepped off plate
-            {
-                ghostOn = false;
+            //if(!door_script.opened) //door has not opened but player or Enemy stepped off plate
+            //{
+                enemyOn = false;
                 if(!playerOn)
                     door_script.platesPressed += 1;
-            }
+            //}
         }
     }
 }

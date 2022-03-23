@@ -17,7 +17,7 @@ public class Spike : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(transform.position.x, pos_y - Mathf.PingPong(Time.time * speed, 1));
+        transform.position = new Vector2(transform.position.x, pos_y - Mathf.PingPong(Time.time * speed, 0.6f));
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5439592963700768184}
   - component: {fileID: 6776737299207393212}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 5888016294389440208}
   - component: {fileID: 6977987140836923842}
   - component: {fileID: 755559999399373713}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform tile v2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
