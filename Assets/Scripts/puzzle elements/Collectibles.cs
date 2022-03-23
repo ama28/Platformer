@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Collectibles : MonoBehaviour
 {
     public Canvas can;
-    public Text text_obj;
+    //public Text text_obj;
     public float speed = 3.5f;
     public float attraction_dist = 1.2f;
     private GameObject player;
@@ -17,7 +17,7 @@ public class Collectibles : MonoBehaviour
     {
         total_collectibles = GameObject.FindGameObjectsWithTag("Collectible").Length;
         // can.gameObject.SetActive(false); // set this to true when the player actually start platforming and stuff
-        text_obj.text = "0/" + total_collectibles.ToString();
+        //text_obj.text = "0/" + total_collectibles.ToString();
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -37,7 +37,7 @@ public class Collectibles : MonoBehaviour
             GameObject[] coll = GameObject.FindGameObjectsWithTag("Collectible");
             int collected = total_collectibles - coll.Length + 1;
 
-            text_obj.text = collected.ToString() + "/" + total_collectibles.ToString();
+            //text_obj.text = collected.ToString() + "/" + total_collectibles.ToString();
 
             Destroy(transform.gameObject);
         }
