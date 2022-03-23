@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash(int direction) //0 = horizontal, 1 = vertical, 2 = diagonal
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Slash");
+        playerAnimator.SetTrigger("DashSlash");
         float temp = my_rigbod.gravityScale;
         my_rigbod.gravityScale = 0;
 
