@@ -3648,5 +3648,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8751639007416798989, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
+      propertyPath: nextScene
+      value: NightCity
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
