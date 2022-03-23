@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator playerAnimator;
     public bool isGrounded;
 
+    public bool rewindTransition = false;
+
     //dash stuff
     private float currentSpeed;
     public float dashPower;
@@ -168,6 +170,8 @@ public class PlayerMovement : MonoBehaviour
         //rewind
         if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) 
         {
+            if (rewindTransition)
+                SceneManager.LoadScene("lab");
             //disable trail then rewind
             GetComponent<TrailRenderer>().enabled = false;
             Rewind();

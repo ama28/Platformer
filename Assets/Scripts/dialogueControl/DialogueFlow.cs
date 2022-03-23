@@ -22,6 +22,10 @@ public class DialogueFlow : MonoBehaviour
     private bool isTalking;
     private bool dialogueSoundPlaying;
 
+    public bool isTutorial;
+    public GameObject rewindMessage;
+    private PlayerMovement movementScript;
+
     void Start()
     {
         typingSpeed = 15;
@@ -30,6 +34,8 @@ public class DialogueFlow : MonoBehaviour
         player_textBar = GameObject.FindGameObjectWithTag("TextBarPlayer");
         NPC_textBar = GameObject.FindGameObjectWithTag("TextBarNPC");
         talkIndicator = GameObject.FindGameObjectWithTag("TextIndicator");
+
+        movementScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
         player_rigid2D = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 
@@ -92,6 +98,12 @@ public class DialogueFlow : MonoBehaviour
 
                 canTalk = false;
                 //maybe change reset current line counter
+
+                if (isTutorial)
+                {
+                    rewindMessage.gameObject.SetActive(true);
+                    movementScript.rewindTransition = true;
+                }
             }
         }else
             talkIndicator.SetActive(false);

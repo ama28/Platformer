@@ -9,7 +9,7 @@ n:Your rewind device malfunctioned and sent you too far back, as did mine.
 p:Malfunctioned? It can't be...but these devices only take us backwards!
 p:How am I going to get back to the present? What about my family?
 n:DO NOT FEAR, young agent!
-n:FOR I, ___ HAVE DEVISED A WAY TO RETURN TO THE PRESENT!
+n:FOR I, ALFRED VON SCHRÖDINGER, HAVE DEVISED A WAY TO RETURN TO THE PRESENT!
 p:You've found a way? What is it? How do we get back?
 n:HOHOH, a little bit of patience, traveler.
 n:The answer is the machine behind you!
