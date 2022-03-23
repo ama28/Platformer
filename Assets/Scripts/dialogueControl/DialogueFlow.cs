@@ -158,7 +158,7 @@ public class DialogueFlow : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Player Voice");
             else if (speaker == 1)
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Scientist Voice");
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.3f);
         }
     }
 }

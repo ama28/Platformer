@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
 
     public bool rewindTransition = false;
+    public GameObject levelChanger;
 
     //dash stuff
     private float currentSpeed;
@@ -117,10 +118,10 @@ public class PlayerMovement : MonoBehaviour
             canDoubleJump = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RestartScene();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    RestartScene();
+        //}
 
         //get movement inputs
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -171,7 +172,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) 
         {
             if (rewindTransition)
-                SceneManager.LoadScene("lab");
+            {
+                levelChanger.GetComponent<LevelChange>().levelToLoad = 1;
+                levelChanger.GetComponent<LevelChange>().transition = true;
+                return;
+            }
             //disable trail then rewind
             GetComponent<TrailRenderer>().enabled = false;
             Rewind();
