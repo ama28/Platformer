@@ -1,28 +1,21 @@
 p:Wha...where am I?
 n:OHHOHO!
-n:The time travel agent final wakes up!
-n:You are here, in my laboratory!
-p:Laboratory?
-p:What kind of lab has decor like this? It looks straight out of ancient Asia.
+n:The time travel agent final wakes up! Welcome to my lab!
+p:Lab? What kind of lab has decor like this? It looks straight out of ancient Asia.
 n:That's because we ARE in ancient Asia!
 n:Your rewind device malfunctioned and sent you too far back, as did mine. 
 p:Malfunctioned? It can't be...but these devices only take us backwards!
 p:How am I going to get back to the present? What about my family?
-n:DO NOT FEAR, young agent!
-n:FOR I, ALFRED VON SCHRÖDINGER, HAVE DEVISED A WAY TO RETURN TO THE PRESENT!
-p:You've found a way? What is it? How do we get back?
-n:HOHOH, a little bit of patience, traveler.
+n:FEAR NOT FOR I, ALFRED WAGNER, HAVE DEVISED A WAY TO RETURN TO THE PRESENT!
 n:The answer is the machine behind you!
 n:Through the use of certain relics I have found in this time period,
 n:I have been building a device to take us back to the future! 
-n:Unfortunately, it is still incomplete. Some of the relics I need are
-n:protected by defenses, which I, a mere mad scientist, cannot overcome. 
+n:Unfortunately, some relics I need are protected by defenses which
+n: I, a mere mad scientist, cannot overcome. 
 n:Hmmm, but for a professional, like say, a time travel agent, *wink wink*
 n:these defenses should be no trouble at all! What do you say?
 p:...
 p:I'll help. I need to get back, no matter what. 
-n:PERFECT! There are two missing pieces that I require.
-n:The first part is in the city! Bring it to me, and
-n:I will tell you where to find the next part!
+n:PERFECT! You will find the first relic I need in the city!
 p:Got it, I'll be right back. 
-n:Also, make sure to pick up any spare parts you see along the way! 
+n:Also, make sure to pick up any yellow spirits you see along the way! 
