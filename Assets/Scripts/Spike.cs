@@ -25,7 +25,10 @@ public class Spike : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //Destroy(other.gameObject);
-            RestartScene();
+            //RestartScene();
+            //minus 1 health
+            if(other.gameObject.GetComponent<playHealth>().canDamage)
+                other.gameObject.GetComponent<playHealth>().currentHealth -= 1;
         }
     }
 
