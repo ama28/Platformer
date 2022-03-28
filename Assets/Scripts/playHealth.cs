@@ -20,6 +20,8 @@ public class playHealth : MonoBehaviour
         canDamage = true;
         healthImage = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Image>();
         //damaged = false;
+
+        StartCoroutine(Flashing());
     }
 
     // Update is called once per frame
@@ -46,10 +48,26 @@ public class playHealth : MonoBehaviour
             StartCoroutine(Reset_canDamage());
         }
 
-        print(currentHealth);
+        if(canDamage)
+            GetComponent<SpriteRenderer>().color = Color.white;
+        //print(currentHealth);
     }
     private IEnumerator Reset_canDamage() {
         yield return new WaitForSeconds(cooldown);
         canDamage = true;
+    }
+
+    private IEnumerator Flashing() {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            if (!canDamage)
+            {
+                if (GetComponent<SpriteRenderer>().color == Color.white)
+                    GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f);
+                else
+                    GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
     }
 }
