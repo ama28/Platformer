@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4679526048886547643}
   - component: {fileID: 4679526048886547642}
   - component: {fileID: 4679526048886547646}
+  - component: {fileID: -7977169573611676683}
   m_Layer: 0
   m_Name: ProjectileEnemy
   m_TagString: Enemy
@@ -146,3 +147,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7977169573611676683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4679526048886547641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -835846848
+      Data2: 1314050492
+      Data3: 336272807
+      Data4: -121509945
+    Path: event:/Shoot
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

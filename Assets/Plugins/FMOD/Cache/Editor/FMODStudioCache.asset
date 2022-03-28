@@ -18,6 +18,60 @@ MonoBehaviour:
   lastModified: 637835704982192275
   FileSizes: []
   Exists: 1
+--- !u!114 &-8798000036809185049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footstep
+  m_EditorClassIdentifier: 
+  Path: event:/Footstep
+  Guid:
+    Data1: -1797508033
+    Data2: 1292335259
+    Data3: -1549208938
+    Data4: 1322113931
+  Banks:
+  - {fileID: -8214488142521110737}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8726441614880455786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Die
+  m_EditorClassIdentifier: 
+  Path: event:/Die
+  Guid:
+    Data1: -1212352064
+    Data2: 1248033596
+    Data3: -398274169
+    Data4: 514611484
+  Banks:
+  - {fileID: -8214488142521110737}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8214488142521110737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,7 +87,7 @@ MonoBehaviour:
   Path: Sound/Desktop/Player.bank
   Name: Desktop/Player
   StudioPath: bank:/Player
-  lastModified: 637840633140000000
+  lastModified: 637840589740000000
   FileSizes: []
   Exists: 1
 --- !u!114 &-7530362658570380279
@@ -108,6 +162,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 93857
+--- !u!114 &-1790797907974408223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Shoot
+  m_EditorClassIdentifier: 
+  Path: event:/Shoot
+  Guid:
+    Data1: -835846848
+    Data2: 1314050492
+    Data3: 336272807
+    Data4: -121509945
+  Banks:
+  - {fileID: 9109166898454364008}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1552649191426404045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,13 +323,73 @@ MonoBehaviour:
   - {fileID: 6165641283780475334}
   - {fileID: 6087490986092384015}
   - {fileID: -7530362658570380279}
+  - {fileID: 2916400760355886221}
+  - {fileID: 3978088171559658963}
+  - {fileID: -8798000036809185049}
+  - {fileID: 4837184353960519561}
+  - {fileID: -8726441614880455786}
+  - {fileID: -1790797907974408223}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9109166898454364008}
   StringsBanks:
   - {fileID: 7827699578474390290}
-  cacheTime: 637840633140000000
+  cacheTime: 637840589740000000
   cacheVersion: 10
+--- !u!114 &2916400760355886221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Boss Music
+  m_EditorClassIdentifier: 
+  Path: event:/Boss Music
+  Guid:
+    Data1: 2022460170
+    Data2: 1161902898
+    Data3: -1477314936
+    Data4: 1680602290
+  Banks:
+  - {fileID: 8124209112472154523}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 45416
+--- !u!114 &3978088171559658963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/Reverby
+  m_EditorClassIdentifier: 
+  Path: snapshot:/Reverby
+  Guid:
+    Data1: -525368472
+    Data2: 1219958496
+    Data3: -2045480291
+    Data4: -1907057378
+  Banks:
+  - {fileID: 9109166898454364008}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &4438306177634106765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +435,33 @@ MonoBehaviour:
     Data2: 1214087073
     Data3: 1136305538
     Data4: 532179262
+  Banks:
+  - {fileID: -8214488142521110737}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4837184353960519561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Collect
+  m_EditorClassIdentifier: 
+  Path: event:/Collect
+  Guid:
+    Data1: -1812729012
+    Data2: 1310786672
+    Data3: 591670463
+    Data4: -1154322097
   Banks:
   - {fileID: -8214488142521110737}
   IsStream: 0
@@ -516,10 +684,10 @@ MonoBehaviour:
   Path: Sound/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637840633140000000
+  lastModified: 637840589740000000
   FileSizes:
   - Name: 
-    Value: 1146
+    Value: 1450
   Exists: 1
 --- !u!114 &8124209112472154523
 MonoBehaviour:
@@ -536,7 +704,7 @@ MonoBehaviour:
   Path: Sound/Desktop/Music.bank
   Name: Desktop/Music
   StudioPath: bank:/Music
-  lastModified: 637840633140000000
+  lastModified: 637840589740000000
   FileSizes: []
   Exists: 1
 --- !u!114 &8895532025834740990
@@ -554,7 +722,7 @@ MonoBehaviour:
   Path: Sound/Desktop/Voice.bank
   Name: Desktop/Voice
   StudioPath: bank:/Voice
-  lastModified: 637840633140000000
+  lastModified: 637840589740000000
   FileSizes: []
   Exists: 1
 --- !u!114 &9038250749159769563
@@ -592,6 +760,6 @@ MonoBehaviour:
   Path: Sound/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 637840633140000000
+  lastModified: 637840589740000000
   FileSizes: []
   Exists: 1

@@ -26,7 +26,10 @@ public class EnemyProjectile : MonoBehaviour
         {
             //Destroy(other.gameObject);
             Destroy(gameObject);
-            RestartScene();
+            if (other.gameObject.GetComponent<playHealth>().canDamage)
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Die");
+                other.gameObject.GetComponent<playHealth>().currentHealth -= 1;
+            //RestartScene();
         }
     }
 
