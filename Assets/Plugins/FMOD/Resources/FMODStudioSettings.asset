@@ -347,8 +347,8 @@ MonoBehaviour:
   sourceProjectPath: 
   sourceBankPath: Sound
   SourceBankPathUnformatted: 
-  BankRefreshCooldown: 1
-  ShowBankRefreshWindow: 0
+  BankRefreshCooldown: 5
+  ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
