@@ -24,6 +24,7 @@ public class ProjectileEnemy : MonoBehaviour
     {
         if(Time.time > nextFire)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot", transform.position);
             Instantiate(bullet, new Vector2(transform.position.x - 1f, transform.position.y) , transform.rotation);
             nextFire = Time.time + fireRate;
         }
