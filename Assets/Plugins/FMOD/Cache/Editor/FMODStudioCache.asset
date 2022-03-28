@@ -45,6 +45,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8726441614880455786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Die
+  m_EditorClassIdentifier: 
+  Path: event:/Die
+  Guid:
+    Data1: -1212352064
+    Data2: 1248033596
+    Data3: -398274169
+    Data4: 514611484
+  Banks:
+  - {fileID: -8214488142521110737}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8214488142521110737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +87,7 @@ MonoBehaviour:
   Path: Sound/Desktop/Player.bank
   Name: Desktop/Player
   StudioPath: bank:/Player
-  lastModified: 637840113467195594
+  lastModified: 637840116101422246
   FileSizes: []
   Exists: 1
 --- !u!114 &-7530362658570380279
@@ -273,12 +300,13 @@ MonoBehaviour:
   - {fileID: 3978088171559658963}
   - {fileID: -8798000036809185049}
   - {fileID: 4837184353960519561}
+  - {fileID: -8726441614880455786}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9109166898454364008}
   StringsBanks:
   - {fileID: 7827699578474390290}
-  cacheTime: 637840113467465512
+  cacheTime: 637840116101652174
   cacheVersion: 10
 --- !u!114 &2916400760355886221
 MonoBehaviour:
@@ -628,10 +656,10 @@ MonoBehaviour:
   Path: Sound/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637840113466370781
+  lastModified: 637840116100212631
   FileSizes:
   - Name: 
-    Value: 1382
+    Value: 1416
   Exists: 1
 --- !u!114 &8124209112472154523
 MonoBehaviour:
@@ -648,7 +676,7 @@ MonoBehaviour:
   Path: Sound/Desktop/Music.bank
   Name: Desktop/Music
   StudioPath: bank:/Music
-  lastModified: 637840113466775729
+  lastModified: 637840116100622503
   FileSizes: []
   Exists: 1
 --- !u!114 &8895532025834740990
@@ -666,7 +694,7 @@ MonoBehaviour:
   Path: Sound/Desktop/Voice.bank
   Name: Desktop/Voice
   StudioPath: bank:/Voice
-  lastModified: 637840113467465512
+  lastModified: 637840116101652174
   FileSizes: []
   Exists: 1
 --- !u!114 &9038250749159769563
@@ -704,6 +732,6 @@ MonoBehaviour:
   Path: Sound/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 637840113466350785
+  lastModified: 637840116100192644
   FileSizes: []
   Exists: 1
