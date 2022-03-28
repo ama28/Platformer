@@ -12,7 +12,9 @@ public class LevelChange : MonoBehaviour
     private void Update()
     {
         if (transition)
+        {
             FadeToLevel();
+        }
     }
 
     public void FadeToLevel()

@@ -117,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
             rayColor = Color.red;
         }
         Debug.DrawRay(boxCollider2d.bounds.center, Vector2.down * (boxCollider2d.bounds.extents.y + extraHeightText), rayColor);
-        Debug.Log(raycastHit.collider);
+        //Debug.Log(raycastHit.collider);
         return raycastHit.collider != null;
     }
 
