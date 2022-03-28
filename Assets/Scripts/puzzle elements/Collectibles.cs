@@ -22,17 +22,16 @@ public class Collectibles : MonoBehaviour
     {
         if (!is_picked_up && collision.CompareTag("Player"))
         {
-            is_picked_up = true;
-            Debug.Log("triggering");
-
             GameObject[] coll = GameObject.FindGameObjectsWithTag("Collectible");
             int collected = total_collectibles - coll.Length + 1;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Collect");
-
             text_obj.text = collected.ToString() + "/" + total_collectibles.ToString();
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Collect");
 
             transform.GetChild(1).gameObject.SetActive(true);
             Destroy(transform.GetChild(0).gameObject);
+
+            is_picked_up = true;
         }
     }
 
