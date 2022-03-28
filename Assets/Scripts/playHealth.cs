@@ -64,7 +64,7 @@ public class playHealth : MonoBehaviour
             if (!canDamage)
             {
                 if (GetComponent<SpriteRenderer>().color == Color.white)
-                    GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f);
+                    GetComponent<SpriteRenderer>().color = new Color(1,1,1,0.5f);
                 else
                     GetComponent<SpriteRenderer>().color = Color.white;
             }
