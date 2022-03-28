@@ -36,6 +36,7 @@ public class Collectibles : MonoBehaviour
         {
             GameObject[] coll = GameObject.FindGameObjectsWithTag("Collectible");
             int collected = total_collectibles - coll.Length + 1;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Collect");
 
             //text_obj.text = collected.ToString() + "/" + total_collectibles.ToString();
 
