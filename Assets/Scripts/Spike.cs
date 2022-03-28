@@ -28,8 +28,11 @@ public class Spike : MonoBehaviour
             //RestartScene();
             //minus 1 health
             if (other.gameObject.GetComponent<playHealth>().canDamage)
+            {
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Die");
                 other.gameObject.GetComponent<playHealth>().currentHealth -= 1;
+            }
+                
         }
     }
 
