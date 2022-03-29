@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     public Sprite defaultSprite;
     public Sprite frozenSprite;
 
+    public GameObject postProcessVolume;
+
     //dash stuff
     private float currentSpeed;
     public float dashPower;
@@ -160,6 +162,8 @@ public class PlayerMovement : MonoBehaviour
                 playerAnimator.enabled = true;
                 if (Time.timeScale == 0f)
                 {
+                    postProcessVolume.SetActive(false);
+
                     ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
                     ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
                     ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
@@ -204,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
             }
             //disable trail then rewind
             GetComponent<TrailRenderer>().enabled = false;
+            postProcessVolume.SetActive(true);
             playerAnimator.enabled = false;
             mySpriteRenderer.sprite = frozenSprite;
             Rewind();
