@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire_speed: 2
+  dir: 0
 --- !u!50 &5408543374481073179
 Rigidbody2D:
   serializedVersion: 4

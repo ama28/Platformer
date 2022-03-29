@@ -15,6 +15,7 @@ TagManager:
   - Collectible
   - DialogueManager
   - HealthBar
+  - Boss
   layers:
   - Default
   - TransparentFX
