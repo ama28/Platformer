@@ -24,7 +24,7 @@ public class BossScript : MonoBehaviour
         CheckTimeOver();
     }
 
-    void CheckTimeOver()
+    void LowHealth()
     {
         if(Time.time > nextFire)
         {
@@ -88,6 +88,30 @@ public class BossScript : MonoBehaviour
             }
             //time b4 fire again
             nextFire = Time.time + fireRate;
+        }
+    }
+
+    void HighHealth()
+    {
+        if(Time.time > nextFire)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot", transform.position);
+            GameObject tempBullet = Instantiate(bullet, new Vector2(transform.position.x - 1f, transform.position.y) , transform.rotation);
+            tempBullet.GetComponent<BulletScript>().dir = Vector3.left;
+            nextFire = Time.time + fireRate;
+        }
+    }
+
+    void CheckTimeOver()
+    {
+        if (GetComponent<BossHealth>().currentHealth == 4)
+        {
+            HighHealth();
+        }
+        
+        if (GetComponent<BossHealth>().currentHealth == 1)
+        {
+            LowHealth();
         }
     }
 }

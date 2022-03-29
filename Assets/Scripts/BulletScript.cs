@@ -22,6 +22,9 @@ public class BulletScript : MonoBehaviour
     void Update()
     {
         transform.position += dir * Time.deltaTime * fire_speed; 
+
+        if(Input.GetKeyDown(KeyCode.R))
+            RestartScene();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -31,8 +34,10 @@ public class BulletScript : MonoBehaviour
             //Destroy(other.gameObject);
             Destroy(gameObject);
             if (other.gameObject.GetComponent<playHealth>().canDamage)
+            {
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Die");
                 other.gameObject.GetComponent<playHealth>().currentHealth -= 1;
+            }
             //RestartScene();
         }
     }
