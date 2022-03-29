@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public Sprite frozenSprite;
 
     public GameObject postProcessVolume;
+    private ParticleSystem particles;
 
     //dash stuff
     private float currentSpeed;
@@ -60,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
 
         playerAnimator = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+
+        particles = GetComponentInChildren<ParticleSystem>();
 
         //dash stuff
         currentSpeed = baseSpeed;
@@ -162,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
                 playerAnimator.enabled = true;
                 if (Time.timeScale == 0f)
                 {
-                    postProcessVolume.SetActive(false);
+                    postProcessVolume.GetComponent<Animator>().SetTrigger("RESUME");
 
                     ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
                     ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
@@ -206,14 +209,14 @@ public class PlayerMovement : MonoBehaviour
                 levelChanger.GetComponent<LevelChange>().transition = true;
                 return;
             }
-            //disable trail then rewind
-            GetComponent<TrailRenderer>().enabled = false;
-            postProcessVolume.SetActive(true);
             playerAnimator.enabled = false;
-            mySpriteRenderer.sprite = frozenSprite;
-            Rewind();
-            //freeze player & ghost
+            ghost.GetComponent<Animator>().enabled = false;
+            StartCoroutine(ParticlesWithDelay());
+            postProcessVolume.GetComponent<Animator>().SetTrigger("REWIND");
             my_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
+            ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
+            ghost_rigbod.gravityScale = 0;
+            StartCoroutine(EBehavior());
         }
 
         SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
@@ -233,6 +236,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    IEnumerator ParticlesWithDelay()
+    {
+        yield return new WaitForSeconds(.4f);
+        particles.Play();
+    }
     
     void FixedUpdate()
     {
@@ -247,6 +256,17 @@ public class PlayerMovement : MonoBehaviour
             //isGrounded = false;
             playerAnimator.SetTrigger("Jump");
         }
+    }
+
+    IEnumerator EBehavior()
+    {
+        yield return new WaitForSeconds(.5f);
+        //disable trail then rewind
+        particles.Play();
+        GetComponent<TrailRenderer>().enabled = false;
+        mySpriteRenderer.sprite = frozenSprite;
+        Rewind();
+        //freeze player & ghost
     }
 
     void Rewind()
