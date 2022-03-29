@@ -18,4 +18,4 @@ p:...
 p:I'll help. I need to get back, no matter what. 
 n:PERFECT! You will find the first relic I need in the city!
 p:Got it, I'll be right back. 
-n:Also, make sure to pick up any yellow spirits you see along the way! 
+n:Also, make sure to pick up any spare timers you see along the way! 
