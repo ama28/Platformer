@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f83e07a74f44d4eebbe75addff6a2412
+guid: 0c4990b6901e14bf7bc577f4e832c04e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -41,13 +41,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 15, y: 1, z: 22, w: 25}
+  alignment: 6
+  spritePivot: {x: 0, y: 0}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -101,7 +101,49 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: b2_0
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 220
+        width: 250
+        height: 100
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 96, y: 6, z: 90, w: 50}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81d70cbe7fd19fb30800000000000000
+      internalID: 4321518268088089880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: b2_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 44
+        width: 276
+        height: 134
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 104, y: 41, z: 108, w: 42}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31e42e5660500bc40800000000000000
+      internalID: 5525922267820871187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
