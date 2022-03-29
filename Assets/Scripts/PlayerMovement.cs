@@ -225,6 +225,7 @@ public class PlayerMovement : MonoBehaviour
             //jump
             my_rigbod.velocity = new Vector3(0, jump_force, 0);
             //isGrounded = false;
+            playerAnimator.SetTrigger("Jump");
         }
     }
 
