@@ -139,6 +139,10 @@ public class PlayerMovement : MonoBehaviour
         {
             canDoubleJump = true;
         }
+        else
+        {
+            canDoubleJump = false;
+        }
 
         //if (Input.GetKeyDown(KeyCode.R))
         //{
