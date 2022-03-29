@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (rewindTransition)
             {
-                levelChanger.GetComponent<LevelChange>().levelToLoad = 1;
+                levelChanger.GetComponent<LevelChange>().levelToLoad = "lab";
                 levelChanger.GetComponent<LevelChange>().transition = true;
                 return;
             }
@@ -256,6 +256,11 @@ public class PlayerMovement : MonoBehaviour
             //isGrounded = false;
             playerAnimator.SetTrigger("Jump");
         }
+    }
+
+    void PlayFootStep()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep");
     }
 
     IEnumerator EBehavior()

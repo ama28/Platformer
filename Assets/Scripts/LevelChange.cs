@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelChange : MonoBehaviour
 {
     public Animator anim;
-    public int levelToLoad;
+    public string levelToLoad;
     public bool transition = false;
 
     private void Update()
