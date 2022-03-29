@@ -3242,10 +3242,6 @@ PrefabInstance:
       propertyPath: healthImage
       value: 
       objectReference: {fileID: 1089756312}
-    - target: {fileID: -4783757721552050489, guid: 7edc5b2f58f2b45398b55e0bca4d120d, type: 3}
-      propertyPath: currentHealth
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1010570712804377787, guid: 7edc5b2f58f2b45398b55e0bca4d120d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3293,10 +3289,6 @@ PrefabInstance:
     - target: {fileID: 1010570712804377788, guid: 7edc5b2f58f2b45398b55e0bca4d120d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010570712804377790, guid: 7edc5b2f58f2b45398b55e0bca4d120d, type: 3}
-      propertyPath: jump_force
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7edc5b2f58f2b45398b55e0bca4d120d, type: 3}

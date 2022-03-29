@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostPrefab: {fileID: 3543884854104081101, guid: 2eb6d7c1c7ec241269d54ef56599d9f8, type: 3}
   baseSpeed: 3
-  jump_force: 7
+  jump_force: 9
   movementVector: {x: 0, y: 0}
   rewindTeleportSpeed: 5
   rewind_cooldown: 0.8
@@ -376,7 +376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07234f816e53b99478f5f826f5e8c59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
+  currentHealth: 3
   prevHealth: 0
   canDamage: 0
   cooldown: 0
+  healthImage: {fileID: 0}
