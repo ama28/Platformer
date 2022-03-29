@@ -31,6 +31,10 @@ public class PlayerMovement : MonoBehaviour
     public bool rewindTransition = false;
     public GameObject levelChanger;
 
+    private SpriteRenderer mySpriteRenderer;
+    public Sprite defaultSprite;
+    public Sprite frozenSprite;
+
     //dash stuff
     private float currentSpeed;
     public float dashPower;
@@ -53,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         time_stationary = 0f;
 
         playerAnimator = GetComponent<Animator>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
 
         //dash stuff
         currentSpeed = baseSpeed;
@@ -152,6 +157,14 @@ public class PlayerMovement : MonoBehaviour
                 else if(vertical != 0  && horizontal != 0){ //diagonal dash
                     StartCoroutine(Dash(2));
                 }
+                playerAnimator.enabled = true;
+                if (Time.timeScale == 0f)
+                {
+                    ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
+                    ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
+                    ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
+                    ghost_rigbod.gravityScale = 0;
+                }
                 Time.timeScale = 1f;
                 canDoubleJump = false;
 
@@ -191,12 +204,11 @@ public class PlayerMovement : MonoBehaviour
             }
             //disable trail then rewind
             GetComponent<TrailRenderer>().enabled = false;
+            playerAnimator.enabled = false;
+            mySpriteRenderer.sprite = frozenSprite;
             Rewind();
-            Time.timeScale = 0f;
             //freeze player & ghost
             my_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
-            ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
-            ghost_rigbod.gravityScale = 0;
         }
 
         SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
@@ -235,13 +247,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position = ghost.transform.position;
         Destroy(ghost);
 
+        Time.timeScale = 0f;
+
         //respawn ghost
-        ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
-        ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
+        //ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
+        //ghost_rigbod = ghost.GetComponent<Rigidbody2D>();
 
         canDoubleJump = true;
-
-        //GetComponent<TrailRenderer>().enabled = true;
     }
 
     private IEnumerator TurnOnGravity()

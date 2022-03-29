@@ -4638,9 +4638,17 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8242670512143869472, guid: e21a537a1dbbba741a49256dc7160973, type: 3}
+      propertyPath: frozenSprite
+      value: 
+      objectReference: {fileID: -1589776804872156859, guid: a391ed339047548389ac16bb43726400, type: 3}
+    - target: {fileID: 8242670512143869472, guid: e21a537a1dbbba741a49256dc7160973, type: 3}
       propertyPath: levelChanger
       value: 
       objectReference: {fileID: 974489073}
+    - target: {fileID: 8242670512143869472, guid: e21a537a1dbbba741a49256dc7160973, type: 3}
+      propertyPath: defaultSprite
+      value: 
+      objectReference: {fileID: 1276963608331548304, guid: fddb50c7b0ba34ea29c087fdee769735, type: 3}
     - target: {fileID: 8242670512143869473, guid: e21a537a1dbbba741a49256dc7160973, type: 3}
       propertyPath: m_SortingOrder
       value: 999
