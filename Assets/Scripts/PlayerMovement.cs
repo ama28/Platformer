@@ -218,16 +218,19 @@ public class PlayerMovement : MonoBehaviour
 
         SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
         //make sure player faces right direction
-        if (horizontal < 0)
+        if (Time.timeScale != 0f)
         {
-            //character faces left
-            mySprite.flipX = true;
-        }
+            if (horizontal < 0)
+            {
+                //character faces left
+                mySprite.flipX = true;
+            }
 
-        if (horizontal > 0)
-        {
-            //character faces right
-            mySprite.flipX = false;
+            if (horizontal > 0)
+            {
+                //character faces right
+                mySprite.flipX = false;
+            }
         }
     }
     
