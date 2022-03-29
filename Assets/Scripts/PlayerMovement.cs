@@ -139,10 +139,6 @@ public class PlayerMovement : MonoBehaviour
         {
             canDoubleJump = true;
         }
-        else
-        {
-            canDoubleJump = false;
-        }
 
         //if (Input.GetKeyDown(KeyCode.R))
         //{
@@ -177,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
                     ghost_rigbod.gravityScale = 0;
                 }
                 Time.timeScale = 1f;
-                canDoubleJump = false;
+                StartCoroutine(PreventDoubleDash());
 
                 //re-enable trail
                 GetComponent<TrailRenderer>().enabled = true;
@@ -239,6 +235,12 @@ public class PlayerMovement : MonoBehaviour
                 mySprite.flipX = false;
             }
         }
+    }
+
+    IEnumerator PreventDoubleDash()
+    {
+        yield return new WaitForSeconds(.1f);
+        canDoubleJump = false;
     }
 
     IEnumerator ParticlesWithDelay()
