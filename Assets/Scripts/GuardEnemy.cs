@@ -34,6 +34,18 @@ public class GuardEnemy : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            if (collision.gameObject.GetComponent<playHealth>().canDamage)
+            {
+                collision.gameObject.GetComponent<playHealth>().currentHealth -= 1;
+            }
+        }
+
+    }
+
     void Update()
     {
         turnTime -= Time.deltaTime;
