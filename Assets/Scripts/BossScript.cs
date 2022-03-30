@@ -54,15 +54,11 @@ public class BossScript : MonoBehaviour
                 count += 1;
             }
 
-            if (count == 30)
-            {
-                count = 0;
-            }
             FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot", transform.position);
 
 
 
-            if (count <= 10)
+            if (GetComponent<BossHealth>().currentHealth == 3)
             {
                 //fire up
                 GameObject tempBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.rotation);
@@ -77,11 +73,11 @@ public class BossScript : MonoBehaviour
                 tempBullet2.GetComponent<BulletScript>().dir = Vector3.right;
 
             }
-            else if (count <= 20){
+            else if (GetComponent<BossHealth>().currentHealth == 2){
                 GameObject tempBullet = Instantiate(bullet, new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z), transform.rotation);
                 tempBullet.GetComponent<BulletScript>().dir = direction;
             }
-            else
+            else if (GetComponent<BossHealth>().currentHealth == 1)
             {
                 GameObject tempBullet = Instantiate(bullet, new Vector3(transform.position.x + direction.x * -1f, transform.position.y + direction.y, transform.position.z), transform.rotation);
                 tempBullet.GetComponent<BulletScript>().dir = new Vector3(direction.x * -1f, direction.y, direction.z);

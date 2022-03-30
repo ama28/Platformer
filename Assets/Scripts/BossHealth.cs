@@ -25,8 +25,8 @@ public class BossHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = 4;
-        prevHealth = 4;
+        currentHealth = 6;
+        prevHealth = 6;
         cooldown = 3;
         canDamage = true;
         //damaged = false;
@@ -38,23 +38,31 @@ public class BossHealth : MonoBehaviour
 
     void MovePosition()
     {
-        if (currentHealth == 3)
+        if (currentHealth == 5)
         {
             GetComponent<BossScript>().enabled = false;
             transform.position = new Vector3(-5.5f, -1.8548f, 0);
             tempLaser1 = Instantiate(horMoveLaser, horLocation.transform.position, transform.rotation);
         }
-        if (currentHealth == 2)
+        if (currentHealth == 4)
         {
             Destroy(tempLaser1);
             transform.position = new Vector3(2.62f, 1.6f, 0);
             tempLaser2 = Instantiate(verMoveLaser, verLocation.transform.position, transform.rotation);
         }
-        if (currentHealth == 1)
+        if (currentHealth == 3)
         {
             Destroy(tempLaser2);
             GetComponent<BossScript>().enabled = true;
             transform.position = new Vector3(0.35f, -1.8548f, 0);
+        }
+        if (currentHealth == 2)
+        {
+            transform.position = new Vector3(6.38f, -0.01f, 0);
+        }
+        if (currentHealth == 1)
+        {
+            transform.position = new Vector3(-2.86f, -1.8548f, 0);
         }
     }
 
