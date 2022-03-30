@@ -40,8 +40,10 @@ public class BulletScript : MonoBehaviour
             }
             //RestartScene();
         }
-        else
+        else if (other.gameObject.name != "CameraConfiner")
+        {
             Destroy(gameObject);
+        }
     }
 
     void RestartScene()
