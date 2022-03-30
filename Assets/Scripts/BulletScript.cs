@@ -40,7 +40,8 @@ public class BulletScript : MonoBehaviour
             }
             //RestartScene();
         }
-        Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     void RestartScene()

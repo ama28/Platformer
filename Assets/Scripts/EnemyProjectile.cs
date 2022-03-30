@@ -34,7 +34,8 @@ public class EnemyProjectile : MonoBehaviour
                 
             //RestartScene();
         }
-        Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     void RestartScene()
