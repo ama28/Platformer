@@ -34,12 +34,7 @@ public class EnemyProjectile : MonoBehaviour
                 
             //RestartScene();
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
         Destroy(gameObject);
-
     }
 
     void RestartScene()
