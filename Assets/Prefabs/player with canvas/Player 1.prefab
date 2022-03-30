@@ -5287,6 +5287,7 @@ GameObject:
   - component: {fileID: 8242670512143869479}
   - component: {fileID: 8242670512143869478}
   - component: {fileID: 8242670512143869475}
+  - component: {fileID: 8276079153592056145}
   - component: {fileID: 8242670512143869484}
   m_Layer: 0
   m_Name: Player 1
@@ -5550,6 +5551,23 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &8276079153592056145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8242670512143869477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07234f816e53b99478f5f826f5e8c59f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  prevHealth: 0
+  canDamage: 0
+  cooldown: 0
+  healthImage: {fileID: 0}
 --- !u!95 &8242670512143869484
 Animator:
   serializedVersion: 3
