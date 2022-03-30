@@ -16,7 +16,7 @@ public class playHealth : MonoBehaviour
     {
         currentHealth = 3;
         prevHealth = 3;
-        cooldown = 5;
+        cooldown = 3;
         canDamage = true;
         healthImage = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Image>();
         //damaged = false;
