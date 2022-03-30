@@ -72,18 +72,23 @@ public class BossScript : MonoBehaviour
                 GameObject tempBullet2 = Instantiate(bullet, new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z), transform.rotation);
                 tempBullet2.GetComponent<BulletScript>().dir = Vector3.right;
 
+                //time b4 fire again
+                nextFire = Time.time + fireRate;
+
             }
             else if (GetComponent<BossHealth>().currentHealth == 2){
-                GameObject tempBullet = Instantiate(bullet, new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z), transform.rotation);
-                tempBullet.GetComponent<BulletScript>().dir = direction;
+                GameObject tempBullet3 = Instantiate(bullet, new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z), transform.rotation);
+                tempBullet3.GetComponent<BulletScript>().dir = direction;
+                //time b4 fire again
+                nextFire = Time.time + fireRate / 2f;
             }
             else if (GetComponent<BossHealth>().currentHealth == 1)
             {
-                GameObject tempBullet = Instantiate(bullet, new Vector3(transform.position.x + direction.x * -1f, transform.position.y + direction.y, transform.position.z), transform.rotation);
-                tempBullet.GetComponent<BulletScript>().dir = new Vector3(direction.x * -1f, direction.y, direction.z);
+                GameObject tempBullet4 = Instantiate(bullet, new Vector3(transform.position.x + direction.x * -1f, transform.position.y + direction.y, transform.position.z), transform.rotation);
+                tempBullet4.GetComponent<BulletScript>().dir = new Vector3(direction.x * -1f, direction.y, direction.z);
+                //time b4 fire again
+                nextFire = Time.time + fireRate / 2f;
             }
-            //time b4 fire again
-            nextFire = Time.time + fireRate;
         }
     }
 
@@ -100,12 +105,12 @@ public class BossScript : MonoBehaviour
 
     void CheckTimeOver()
     {
-        if (GetComponent<BossHealth>().currentHealth == 4)
+        if (GetComponent<BossHealth>().currentHealth == 6)
         {
             HighHealth();
         }
         
-        if (GetComponent<BossHealth>().currentHealth == 1)
+        if (GetComponent<BossHealth>().currentHealth <= 3)
         {
             LowHealth();
         }

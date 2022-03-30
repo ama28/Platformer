@@ -15,8 +15,8 @@ public class BulletScript : MonoBehaviour
     void Awake()
     {
         bullet_collider = GetComponent<Collider2D>();
-        GameObject ghost = GameObject.FindGameObjectWithTag("Ghost");
-        Physics2D.IgnoreCollision(bullet_collider, ghost.GetComponent<Collider2D>());
+        //GameObject ghost = GameObject.FindGameObjectWithTag("Ghost");
+        //Physics2D.IgnoreCollision(bullet_collider, ghost.GetComponent<Collider2D>());
     }
 
     void Update()

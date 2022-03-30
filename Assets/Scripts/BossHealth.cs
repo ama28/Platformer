@@ -47,7 +47,7 @@ public class BossHealth : MonoBehaviour
         if (currentHealth == 4)
         {
             Destroy(tempLaser1);
-            transform.position = new Vector3(2.62f, 1.6f, 0);
+            transform.position = new Vector3(2.2f, 1.6f, 0);
             tempLaser2 = Instantiate(verMoveLaser, verLocation.transform.position, transform.rotation);
         }
         if (currentHealth == 3)
@@ -62,7 +62,7 @@ public class BossHealth : MonoBehaviour
         }
         if (currentHealth == 1)
         {
-            transform.position = new Vector3(-2.86f, -1.8548f, 0);
+            transform.position = new Vector3(-5.8f, -1.8548f, 0);
         }
     }
 

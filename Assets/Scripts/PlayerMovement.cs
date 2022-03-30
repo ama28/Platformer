@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
     }
 
-    void OnCollisionEnter2D(Collision2D collision) //kill enemy w dash & check grounded
+    void OnCollisionStay2D(Collision2D collision) //kill enemy w dash & check grounded
     {
         if(collision.gameObject.tag == "Enemy" && isDashing)
         {
