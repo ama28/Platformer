@@ -11,6 +11,7 @@ public class Ghost : MonoBehaviour
     private PlayerMovement moveScript;
     private Animator ghostAnimator;
     public bool isDashing = false;
+    public GameObject[] collisionsToIgnore;
     public float dashXVelocity;
     public float delay_secs = 1.2f; // amount of delay between ghost and player
 
@@ -25,7 +26,7 @@ public class Ghost : MonoBehaviour
         GameObject[] obstructions = GameObject.FindGameObjectsWithTag("Obstruction");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        GameObject[] collisionsToIgnore = obstructions.Concat(enemies).ToArray();
+        collisionsToIgnore = obstructions.Concat(enemies).ToArray();
 
         //prevent collision between ghost and player
         myCollider = GetComponent<Collider2D>();
