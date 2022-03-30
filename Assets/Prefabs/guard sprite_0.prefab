@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  turnTime: 2
+  turnTime: 0.1
 --- !u!95 &4543282413417753706
 Animator:
   serializedVersion: 3

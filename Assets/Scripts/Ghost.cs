@@ -76,7 +76,7 @@ public class Ghost : MonoBehaviour
         // adjusting for when player and ghost gets slight out of sync 
         if (time_standing_still > delay_secs)
         {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position, .2f);
+            transform.position = player.transform.position;//Vector3.Lerp(transform.position, player.transform.position, .2f);
         }
         yield return new WaitForSeconds(delay_secs);
         ghostAnimator.SetFloat("GhostSpeed", Mathf.Abs(move.x));
