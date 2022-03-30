@@ -15,12 +15,24 @@ EditorBuildSettings:
     path: Assets/Scenes/lab.unity
     guid: 074c045cb59b0f64e92f86b48154f61a
   - enabled: 1
-    path: Assets/Scenes/NightCity.unity
-    guid: 19b74e8f2d26e4a01a0d1fdb30975b55
+    path: Assets/Scenes/night_city.unity
+    guid: 5c8eeb31f1ca04e55b16cb58751588e8
   - enabled: 1
     path: Assets/Scenes/lab2.unity
-    guid: 1217f42c36b28481fb300563ff036aab
+    guid: 9fe15b1d3876e456bad3ed030a820e97
   - enabled: 1
-    path: Assets/Scenes/shrine.unity
-    guid: 4cea8d363a27d4d47acc20358f420898
+    path: Assets/Scenes/spiritshrine.unity
+    guid: 00c3323f6a9139f448e3e047c8356743
+  - enabled: 1
+    path: Assets/Scenes/lab3.unity
+    guid: c4eb1543fc7ff415b96ff56dcf0340a4
+  - enabled: 1
+    path: Assets/Scenes/Zun Scene.unity
+    guid: 8b9afc31a44aa48fc929b4b696701412
+  - enabled: 1
+    path: Assets/Scenes/lab4.unity
+    guid: fe2b02142d0a24caea39fe2480e298a1
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: bddb99c95de394da4878b087f7815f47
   m_configObjects: {}

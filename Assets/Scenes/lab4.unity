@@ -429,6 +429,8 @@ MonoBehaviour:
   current_line: 0
   script_name: hub2
   canTalk: 0
+  isBoss: 0
+  levelChange: {fileID: 0}
   isTutorial: 0
   rewindMessage: {fileID: 0}
 --- !u!4 &149915826
@@ -2650,7 +2652,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261741214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.724186, y: -4.179657, z: -10}
+  m_LocalPosition: {x: -18.758463, y: -4.1805468, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3574,19 +3576,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250576392011557260, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 256.23
+      value: 306.21
       objectReference: {fileID: 0}
     - target: {fileID: 250576392011557260, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 44.6
+      value: 37.6
       objectReference: {fileID: 0}
     - target: {fileID: 250576392011557260, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 125.1
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 396692032225551032, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: m_text
-      value: "(F) ENTER \nShrine"
+      value: "(F) RETURN \nto the future"
       objectReference: {fileID: 0}
     - target: {fileID: 396692032225551032, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: m_fontSize
@@ -3682,11 +3684,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8751639007416798979, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8751639007416798988, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.43
+      value: 0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751639007416798988, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.91
       objectReference: {fileID: 0}
     - target: {fileID: 8751639007416798989, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: nextScene

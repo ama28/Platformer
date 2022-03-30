@@ -5,13 +5,12 @@ using UnityEngine;
 public class followPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float followSpeed;
+    public float followSpeed = 0.5f;
     public bool canFollow, following;
     public GameObject player;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        followSpeed = 1;
         canFollow = false;
         following = false;
         GetComponent<SpriteRenderer>().color = new Color(1,1, 1, 0);

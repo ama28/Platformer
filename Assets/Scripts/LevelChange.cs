@@ -32,6 +32,7 @@ public class LevelChange : MonoBehaviour
     public void ToBoss()
     {
         SceneManager.LoadScene("Zun Scene");
+        Debug.Log("Switching");
     }
 
     IEnumerator ParticlesWithDelay()

@@ -1531,7 +1531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &974489074
 Transform:
   m_ObjectHideFlags: 0
@@ -1561,7 +1561,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 974489076}
   levelToLoad: 0
+  finishTransition: 0
   transition: 0
+  postProcessVolume: {fileID: 0}
+  player: {fileID: 0}
+  rewindTime: 0
+  resumeTime: 0
 --- !u!95 &974489076
 Animator:
   serializedVersion: 3
@@ -2650,7 +2655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555401808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.420948, y: -4.7028465, z: -10}
+  m_LocalPosition: {x: -10.416546, y: -4.7028, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2865,6 +2870,8 @@ MonoBehaviour:
   current_line: 0
   script_name: warehousePlayer
   canTalk: 0
+  isBoss: 0
+  levelChange: {fileID: 0}
   isTutorial: 1
   rewindMessage: {fileID: 0}
 --- !u!4 &1672944071
