@@ -7,14 +7,16 @@ public class GuardEnemy : MonoBehaviour
     public float speed;
     Transform target;
     private Animator myAnim;
-    public float turnTime = 2f; 
+    public float turnTime; 
     Vector2 currentTarget;
+    float initTurnTime;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         myAnim = GetComponent<Animator>();
         currentTarget = new Vector2(target.position.x, transform.position.y);
+        initTurnTime = turnTime;
     }
 
     void TurnTowardPlayer()
@@ -30,7 +32,7 @@ public class GuardEnemy : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(0, 0, 0);
                 currentTarget = new Vector2(target.position.x, transform.position.y);
             }
-            turnTime = 2f;
+            turnTime = initTurnTime;
         }
     }
 
