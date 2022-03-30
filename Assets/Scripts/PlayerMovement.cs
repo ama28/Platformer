@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator playerAnimator;
     public bool isGrounded;
+    public bool canRewind = true;
 
     public bool rewindTransition = false;
     public GameObject levelChanger;
@@ -148,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             canDoubleJump = true;
+            canRewind = true;
         }
 
         //if (Input.GetKeyDown(KeyCode.R))
@@ -212,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         else { time_stationary = 0f; }
 
         //rewind
-        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) && !rewinding && !frozen) 
+        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) && !rewinding && !frozen && canRewind) 
         {
             if (rewindTransition)
             {
@@ -220,6 +222,7 @@ public class PlayerMovement : MonoBehaviour
                 levelChanger.GetComponent<LevelChange>().transition = true;
                 return;
             }
+            Debug.Log("hello?");
             rewinding = true;
             playerAnimator.enabled = false;
             ghost.GetComponent<Animator>().enabled = false;
@@ -299,6 +302,7 @@ public class PlayerMovement : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Rewind");
         transform.position = ghost.transform.position;
+        canRewind = false;
         Destroy(ghost);
 
         Time.timeScale = 0f;
