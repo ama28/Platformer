@@ -685,7 +685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166669150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -67.97345, y: -2.2992523, z: -0.1829958}
+  m_LocalPosition: {x: -65.993454, y: -2.2992523, z: -0.1829958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 121669936}
@@ -1734,6 +1734,7 @@ GameObject:
   - component: {fileID: 974489074}
   - component: {fileID: 974489075}
   - component: {fileID: 974489076}
+  - component: {fileID: 974489077}
   m_Layer: 0
   m_Name: LevelChanger
   m_TagString: Untagged
@@ -1770,7 +1771,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 974489076}
   levelToLoad: 
+  finishTransition: 0
   transition: 0
+  postProcessVolume: {fileID: 961260879}
+  player: {fileID: 0}
+  rewindTime: 0.5
+  resumeTime: 0.1
 --- !u!95 &974489076
 Animator:
   serializedVersion: 3
@@ -1790,6 +1796,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &974489077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974489073}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3769857af0a0f04caf178cf3706255e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 974489076}
+  levelToLoad: 
+  finishTransition: 0
+  transition: 0
+  postProcessVolume: {fileID: 0}
 --- !u!1 &1005598725
 GameObject:
   m_ObjectHideFlags: 0
@@ -2908,7 +2931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555401808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.472904, y: -4.686809, z: -10}
+  m_LocalPosition: {x: -31.447512, y: -4.7023654, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4707,7 +4730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8242670512143869474, guid: e21a537a1dbbba741a49256dc7160973, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.51
+      value: -31.53
       objectReference: {fileID: 0}
     - target: {fileID: 8242670512143869474, guid: e21a537a1dbbba741a49256dc7160973, type: 3}
       propertyPath: m_LocalPosition.y
