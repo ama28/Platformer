@@ -22,9 +22,9 @@ public class Laser : MonoBehaviour
     {
         float timeSinceInitialization = Time.timeSinceLevelLoad - initializationTime;
         if (horMovement)
-            transform.position = new Vector2(pos_x + Mathf.PingPong(timeSinceInitialization * speed, 8f), transform.position.y);
+            transform.position = new Vector2(pos_x + Mathf.PingPong(timeSinceInitialization * speed, 30f), transform.position.y);
         else
-            transform.position = new Vector2(transform.position.x, pos_y - Mathf.PingPong(timeSinceInitialization * speed, 5f));
+            transform.position = new Vector2(transform.position.x, pos_y - Mathf.PingPong(timeSinceInitialization * speed, 10f));
     }
 
     void OnTriggerEnter2D(Collider2D other)
