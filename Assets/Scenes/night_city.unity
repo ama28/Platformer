@@ -1710,8 +1710,8 @@ Transform:
   m_LocalPosition: {x: 12.96554, y: 13.983991, z: -713.9761}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1441737221}
   - {fileID: 1357549173}
+  - {fileID: 1441737221}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1867,7 +1867,7 @@ GameObject:
   - component: {fileID: 98468807}
   m_Layer: 3
   m_Name: door
-  m_TagString: Untagged
+  m_TagString: Obstruction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18004,7 +18004,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286666361}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -47.67674, y: 1.4222445, z: 258.3752}
+  m_LocalPosition: {x: -47.67924, y: 1.4222445, z: 258.3752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2004969692}
@@ -19362,13 +19362,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4679526048886547642, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
+      propertyPath: fireRate
+      value: 1.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4679526048886547644, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4679526048886547645, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4679526048886547645, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19380,7 +19384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679526048886547645, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 713.9761
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4679526048886547645, guid: 75800d2f7ad41499eaa3c770e8e8f277, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26569,7 +26573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2154274756723591071, guid: 275853b811ef44eac924960f66c0713e, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Obstruction
       objectReference: {fileID: 0}
     - target: {fileID: 2154274757748790401, guid: 275853b811ef44eac924960f66c0713e, type: 3}
       propertyPath: m_LocalScale.x
@@ -28194,7 +28198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2154274756723591071, guid: 275853b811ef44eac924960f66c0713e, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Obstruction
       objectReference: {fileID: 0}
     - target: {fileID: 2154274757748790401, guid: 275853b811ef44eac924960f66c0713e, type: 3}
       propertyPath: m_LocalScale.x
