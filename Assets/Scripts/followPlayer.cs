@@ -62,8 +62,11 @@ public class followPlayer : MonoBehaviour
         if (collision.tag == "Player")
         {
             //do damage
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Die");
-            collision.gameObject.GetComponent<playHealth>().currentHealth -= 1;
+            if (collision.gameObject.GetComponent<playHealth>().canDamage)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Die");
+                collision.gameObject.GetComponent<playHealth>().currentHealth -= 1;
+            }
         }
     }
 
