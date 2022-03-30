@@ -3430,7 +3430,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 2072858680}
   levelToLoad: 0
+  finishTransition: 0
   transition: 0
+  postProcessVolume: {fileID: 0}
+  player: {fileID: 0}
+  rewindTime: 0
+  resumeTime: 0
 --- !u!4 &2072858682
 Transform:
   m_ObjectHideFlags: 0
@@ -3895,7 +3900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8751639007416798989, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: nextScene
-      value: NightCity
+      value: night_city
       objectReference: {fileID: 0}
     - target: {fileID: 8751639007416798989, guid: 68d9e7cd27f44284cb09278817237cec, type: 3}
       propertyPath: enterIndicator

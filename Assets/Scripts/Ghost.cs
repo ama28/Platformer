@@ -75,7 +75,7 @@ public class Ghost : MonoBehaviour
     private IEnumerator FollowMe(Vector2 move, float time_standing_still)
     {
         // adjusting for when player and ghost gets slight out of sync 
-        if ((time_standing_still > .5f || Vector3.Distance(transform.position, player.transform.position) > 15)
+        if ((time_standing_still > delay_secs || Vector3.Distance(transform.position, player.transform.position) > 15)
              && !moveScript.rewinding)
         {
             transform.position = player.transform.position;//Vector3.Lerp(transform.position, player.transform.position, .2f);

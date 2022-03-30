@@ -1,0 +1,7 @@
+p:Here's the last piece.
+n:WELL DONE TRAVELER!
+n:my machine is finally done! time for me to go home! mwahaha!
+p:What do you mean "me", we're both going. 
+n:Oh, my apologies, did I forget to mention that the machine only works for one person?
+n:If you want to take my spot, you'll have to fight me for it!
+p:!!!!

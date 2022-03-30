@@ -22,6 +22,8 @@ public class DialogueFlow : MonoBehaviour
     private bool isTalking;
     private bool dialogueSoundPlaying;
 
+    public bool isBoss = false;
+    public GameObject levelChange;
     public bool isTutorial;
     public GameObject rewindMessage;
     private PlayerMovement movementScript;
@@ -103,6 +105,11 @@ public class DialogueFlow : MonoBehaviour
                 {
                     rewindMessage.gameObject.SetActive(true);
                     movementScript.rewindTransition = true;
+                }
+
+                if (isBoss)
+                {
+                    levelChange.GetComponent<Animator>().SetTrigger("WhiteFade");
                 }
             }
 

@@ -29,6 +29,11 @@ public class LevelChange : MonoBehaviour
 
     }
 
+    public void ToBoss()
+    {
+        SceneManager.LoadScene("Zun Scene");
+    }
+
     IEnumerator ParticlesWithDelay()
     {
         yield return new WaitForSeconds(.4f);
