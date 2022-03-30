@@ -73,7 +73,7 @@ public class BossHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
-            SceneManager.LoadScene("lab3");
+            SceneManager.LoadScene("lab4");
         }
 
         if (prevHealth != currentHealth)//damaged by player
