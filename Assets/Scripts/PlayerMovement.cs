@@ -69,12 +69,20 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
     }
 
-    void OnCollisionStay2D(Collision2D collision) //kill enemy w dash & check grounded
+    void OnCollisionEnter2D(Collision2D collision) //kill enemy w dash & check grounded
     {
         if(collision.gameObject.tag == "Enemy" && isDashing)
         {
             Destroy(collision.gameObject);
         }
+        if(collision.gameObject.tag == "Boss" && isDashing)
+        {
+            if (collision.gameObject.GetComponent<BossHealth>().canDamage)
+            {
+                collision.gameObject.GetComponent<BossHealth>().currentHealth -= 1;
+            }
+        }
+
     }
 
     IEnumerator Dash(int direction) //0 = horizontal, 1 = vertical, 2 = diagonal
