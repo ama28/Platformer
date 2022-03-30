@@ -13,7 +13,6 @@ public class EnemyProjectile : MonoBehaviour
         myCollider = GetComponent<Collider2D>();
         GameObject ghost = GameObject.FindGameObjectWithTag("Ghost");
         Physics2D.IgnoreCollision(myCollider, ghost.GetComponent<Collider2D>());
-        
     }
     void Update()
     {
@@ -33,6 +32,10 @@ public class EnemyProjectile : MonoBehaviour
             }
                 
             //RestartScene();
+        }
+        else if (other.gameObject.name != "CameraConfiner")
+        {
+            Destroy(gameObject);
         }
     }
 
