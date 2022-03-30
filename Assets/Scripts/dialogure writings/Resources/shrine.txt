@@ -1,0 +1,3 @@
+p:Says an evil spirit's haunting the shrine...it might be better to avoid it while exploring here
+p:Hope it won't follow me around.
+p:Oh no.

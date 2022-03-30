@@ -105,8 +105,15 @@ public class DialogueFlow : MonoBehaviour
                     movementScript.rewindTransition = true;
                 }
             }
+
+            
         }else
             talkIndicator.SetActive(false);
+
+        if(isTalking)
+            player_rigid2D.constraints = RigidbodyConstraints2D.FreezePosition;
+        else
+            player_rigid2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 
     }
 
