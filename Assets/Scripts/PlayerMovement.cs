@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private float delay;
 
     public float rewind_cooldown = 3.0f; // cooldown before rewinding again
+    public bool rewinding = false;
+    public bool frozen = false;
 
     public bool canDoubleJump = true; // for rewind jump
     public float time_stationary;
@@ -160,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
         //dash stuff
         if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.LeftShift)){
-            if(!isDashing && canDoubleJump){
+            if(!isDashing && canDoubleJump && !rewinding){
                 if((vertical == 0 && horizontal != 0)){ //horizontal dash
                     StartCoroutine(Dash(0));
                 }
@@ -187,6 +189,7 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<TrailRenderer>().enabled = true;
 
                 //unfreeze player
+                frozen = false;
                 my_rigbod.constraints = RigidbodyConstraints2D.None;
                 my_rigbod.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -209,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         else { time_stationary = 0f; }
 
         //rewind
-        if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) 
+        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) && !rewinding) 
         {
             if (rewindTransition)
             {
@@ -217,19 +220,23 @@ public class PlayerMovement : MonoBehaviour
                 levelChanger.GetComponent<LevelChange>().transition = true;
                 return;
             }
+            rewinding = true;
             playerAnimator.enabled = false;
             ghost.GetComponent<Animator>().enabled = false;
             StartCoroutine(ParticlesWithDelay());
             postProcessVolume.GetComponent<Animator>().SetTrigger("REWIND");
+
+            frozen = true;
             my_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
             ghost_rigbod.constraints = RigidbodyConstraints2D.FreezePosition;
             ghost_rigbod.gravityScale = 0;
+
             StartCoroutine(EBehavior());
         }
 
         SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
         //make sure player faces right direction
-        if (Time.timeScale != 0f)
+        if (!rewinding)
         {
             if (horizontal < 0)
             {
@@ -295,6 +302,7 @@ public class PlayerMovement : MonoBehaviour
         Destroy(ghost);
 
         Time.timeScale = 0f;
+        rewinding = false;
 
         //respawn ghost
         //ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);

@@ -5354,7 +5354,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 999
   m_Sprite: {fileID: 1276963608331548304, guid: fddb50c7b0ba34ea29c087fdee769735, type: 3}
-  m_Color: {r: 0.759434, g: 1, b: 0.7603274, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5382,6 +5382,8 @@ MonoBehaviour:
   movementVector: {x: 0, y: 0}
   rewindTeleportSpeed: 5
   rewind_cooldown: 0.8
+  rewinding: 0
+  frozen: 0
   canDoubleJump: 1
   time_stationary: 0
   is_moving: 0
