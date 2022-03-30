@@ -41,20 +41,20 @@ public class BossHealth : MonoBehaviour
         if (currentHealth == 3)
         {
             GetComponent<BossScript>().enabled = false;
-            transform.position = new Vector3(-12f, -3f, 0);
+            transform.position = new Vector3(-5.5f, -1.8548f, 0);
             tempLaser1 = Instantiate(horMoveLaser, horLocation.transform.position, transform.rotation);
         }
         if (currentHealth == 2)
         {
             Destroy(tempLaser1);
-            transform.position = new Vector3(5.1f, -0.93f, 0);
+            transform.position = new Vector3(2.62f, 1.6f, 0);
             tempLaser2 = Instantiate(verMoveLaser, verLocation.transform.position, transform.rotation);
         }
         if (currentHealth == 1)
         {
             Destroy(tempLaser2);
             GetComponent<BossScript>().enabled = true;
-            transform.position = new Vector3(-0.3f, -4.514801f, 0);
+            transform.position = new Vector3(0.35f, -1.8548f, 0);
         }
     }
 
