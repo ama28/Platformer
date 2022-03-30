@@ -63,7 +63,10 @@ public class BossHealth : MonoBehaviour
     {
         //restart scene if player dies
         if (currentHealth <= 0)
+        {
             Destroy(gameObject);
+            SceneManager.LoadScene("lab3");
+        }
 
         if (prevHealth != currentHealth)//damaged by player
         {
