@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         else { time_stationary = 0f; }
 
         //rewind
-        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) && !rewinding) 
+        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.E)) && !rewinding && !frozen) 
         {
             if (rewindTransition)
             {
