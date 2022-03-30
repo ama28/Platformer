@@ -6,7 +6,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class glowingEffect : MonoBehaviour
 {
     public float changeRate;
-    public float maxIntensity,minIntensity;
+    private float maxIntensity,minIntensity;
     private Light2D myLight;
     private bool scaleup;
     // Start is called before the first frame update
@@ -14,6 +14,8 @@ public class glowingEffect : MonoBehaviour
     {
         myLight = gameObject.GetComponent<Light2D>();
         scaleup = true;
+        maxIntensity = myLight.intensity;
+        minIntensity = 0;
     }
 
     // Update is called once per frame
